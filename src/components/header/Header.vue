@@ -13,7 +13,7 @@
         </svg>
       </button>
 
-      <div class="search relative mx-4 lg:mx-0">
+      <!-- <div class="search relative mx-4 lg:mx-0">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
           <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
             <path
@@ -31,11 +31,11 @@
           type="text"
           placeholder="Search"
         />
-      </div>
+      </div> -->
     </div>
 
     <div class="flex items-center">
-      <div v-data="{ notificationOpen: false }" class="relative">
+      <!-- <div v-data="{ notificationOpen: false }" class="relative">
         <button @click="notificationOpen = !notificationOpen" class="flex mx-4 text-gray-600 focus:outline-none">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -112,7 +112,7 @@
             <p class="mx-2 text-sm"><span class="font-bold" to="#">Abigail Bennett</span> start following you . 3h</p>
           </RouterLink>
         </div>
-      </div>
+      </div> -->
 
       <div class="profile relative">
         <button
@@ -124,18 +124,15 @@
             src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80"
             alt="Your avatar"
           />
+          <span class="w-full h-full rounded-full bg-gray-300"></span>
         </button>
 
-        <div v-cloak v-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
+        <div v-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
 
         <div
-          v-cloak
           v-show="dropdownOpen"
           class="absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl"
         >
-          <RouterLink to="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-            >Profile</RouterLink
-          >
           <RouterLink to="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >Products</RouterLink
           >
