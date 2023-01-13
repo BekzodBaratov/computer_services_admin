@@ -2,7 +2,7 @@
   <div
     v-cloak
     :class="sidebarOpen ? 'block' : 'hidden'"
-    @click="sidebarOpen = false"
+    @click="emit('closeSidebar')"
     class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"
   ></div>
 
@@ -105,5 +105,6 @@
 <script setup>
 import { ref } from "vue";
 
-const sidebarOpen = ref(true);
+const emit = defineEmits(["closeSidebar"]);
+const props = defineProps(["sidebarOpen"]);
 </script>
