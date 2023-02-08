@@ -98,7 +98,6 @@ const formLoginData = () => {
     fetchApi(state);
   }
 };
-console.log(store.isRegisteration);
 
 const fetchApi = (data) => {
   axios({

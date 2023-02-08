@@ -145,6 +145,6 @@
 import { RouterLink } from "vue-router";
 import { ref } from "vue";
 const emit = defineEmits(["openSidebar2"]);
-const notificationOpen = ref(false);
+// const notificationOpen = ref(false);
 const dropdownOpen = ref(false);
 </script>

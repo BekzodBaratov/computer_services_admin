@@ -35,8 +35,7 @@
     <nav class="mt-10">
       <RouterLink
         @click="handleNav('/')"
-        class="flex items-center px-6 py-2 mt-4 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-        :class="routePath == '/' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'"
+        class="flex items-center px-6 py-2 mt-4 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 text-gray-500"
         to="/"
       >
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,8 +56,7 @@
       </RouterLink>
       <RouterLink
         @click="handleNav('/users')"
-        class="flex items-center px-6 py-2 mt-4 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-        :class="routePath == '/users' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'"
+        class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         to="/users"
       >
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -81,7 +79,6 @@
       <RouterLink
         @click="handleNav('/ui-elements')"
         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-        :class="routePath == '/ui-elements' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'"
         to="/ui-elements"
       >
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -99,7 +96,6 @@
       <RouterLink
         @click="handleNav('/tables')"
         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-        :class="routePath == '/tables' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'"
         to="/tables"
       >
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,7 +113,6 @@
       <RouterLink
         @click="handleNav('/forms')"
         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-        :class="routePath == '/forms' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'"
         to="/forms"
       >
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -134,6 +129,7 @@
     </nav>
   </div>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
@@ -150,3 +146,9 @@ const handleNav = (path) => {
   console.log(path == routePath);
 };
 </script>
+
+<style scoped>
+.router-link-active {
+  @apply text-gray-100 bg-opacity-25 bg-gray-700;
+}
+</style>
