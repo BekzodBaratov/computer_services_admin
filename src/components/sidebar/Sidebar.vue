@@ -34,7 +34,6 @@
 
     <nav class="mt-10">
       <RouterLink
-        @click="handleNav('/')"
         class="flex items-center px-6 py-2 mt-4 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 text-gray-500"
         to="/"
       >
@@ -55,7 +54,6 @@
         <span class="mx-3">Dashboard</span>
       </RouterLink>
       <RouterLink
-        @click="handleNav('/users')"
         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         to="/users"
       >
@@ -77,7 +75,6 @@
       </RouterLink>
 
       <RouterLink
-        @click="handleNav('/ui-elements')"
         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         to="/ui-elements"
       >
@@ -94,7 +91,6 @@
       </RouterLink>
 
       <RouterLink
-        @click="handleNav('/tables')"
         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         to="/tables"
       >
@@ -111,7 +107,6 @@
       </RouterLink>
 
       <RouterLink
-        @click="handleNav('/forms')"
         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         to="/forms"
       >
@@ -131,20 +126,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-let routePath;
 
 const emit = defineEmits(["closeSidebar"]);
 const props = defineProps(["sidebarOpen"]);
-
-const handleNav = (path) => {
-  routePath = route.path;
-  // console.log(routePath);
-  console.log(path == routePath);
-};
 </script>
 
 <style scoped>
