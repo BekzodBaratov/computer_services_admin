@@ -117,14 +117,10 @@
       <div class="profile relative">
         <button
           @click="dropdownOpen = !dropdownOpen"
-          class="relative block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
+          class="relative block w-8 h-8 overflow-hidden rounded-full bg-gray-700 shadow focus:outline-none"
         >
-          <img
-            class="object-cover w-full h-full"
-            src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80"
-            alt="Your avatar"
-          />
-          <span class="w-full h-full rounded-full bg-gray-300"></span>
+          <i class="far fa-user text-gray-300"></i>
+          <span class="w-full h-full rounded-full bg-gray-900"></span>
         </button>
 
         <div v-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
