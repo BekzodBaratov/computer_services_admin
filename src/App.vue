@@ -10,7 +10,7 @@
       </main>
     </div>
   </div>
-  <Login></Login>
+  <Login />
 </template>
 
 <script setup>
