@@ -154,7 +154,9 @@
 
 <script setup>
 import { onMounted } from "@vue/runtime-core";
-import axios from "/src/plugins/axios"
+import axios from "axios";
+
+
 
 const fetchUser = () => {
   axios({
