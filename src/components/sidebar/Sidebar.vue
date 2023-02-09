@@ -79,19 +79,18 @@
     </nav>
   </div>
 </template>
+
 <script setup>
-import { ref } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-let routePath;
 
 const emit = defineEmits(["closeSidebar"]);
 const props = defineProps(["sidebarOpen"]);
-
-const handleNav = (path) => {
-  routePath = route.path;
-  // console.log(routePath);
-  console.log(path == routePath);
-};
 </script>
+
+<style scoped>
+.router-link-active {
+  @apply text-gray-100 bg-opacity-25 bg-gray-700;
+}
+</style>

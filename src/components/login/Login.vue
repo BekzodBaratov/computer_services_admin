@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
-    <div @click="emit('closeLoginModal')" class="fixed z-[999999] inset-0 bg-[#0006] backdrop-blur-sm"></div>
-    <div class="fixed z-[999999] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div v-if="!store.isRegisteration" class="fixed z-[999999] inset-0 bg-[#0006] backdrop-blur-md"></div>
+    <div v-if="!store.isRegisteration" class="fixed z-[999999] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="loginModalbg p-16 text-[#F4F6F9] text-lg">
         <div class="flex flex-col gap-6">
           <img class="w-28 self-center mb-8" src="../../assets/logo.png" alt="" />
@@ -26,9 +26,9 @@
             </div>
             <div class="flex justify-center">
               <button type="submit" @click.prevent="formLoginData">
-                <button class="btn">
-                  <span class="py-1 px-4">Вход</span>
-                </button>
+                <ButtonFill>
+                  <span class="py-2 px-4">Вход</span>
+                </ButtonFill>
               </button>
             </div>
           </form>
@@ -36,7 +36,7 @@
       </div>
     </div>
   </Teleport>
-  <!-- <LoadingModalVue v-if="loading" /> -->
+  <LoadingModalVue v-if="loading" />
 </template>
 
 <script setup>
@@ -45,7 +45,8 @@ import { required, email, minLength, helpers, maxLength } from "@vuelidate/valid
 import { useVuelidate } from "@vuelidate/core";
 import axios from "axios";
 
-// import LoadingModalVue from "./LoadingModal.vue";
+import LoadingModalVue from "./LoadingModal.vue";
+import ButtonFill from "../buttons/ButtonFill.vue";
 import { admin } from "../../store/admin";
 
 const store = admin();
@@ -73,12 +74,11 @@ const rules = computed(() => {
         return /[0-9]/.test(value);
       }),
       containsSpecial: helpers.withMessage("The password requires an special character", function (value) {
-        return /[#?!_@$%^&*-.]/.test(value);
+        return /[#?!_@$%^&*.-]/.test(value);
       }),
     },
   };
 });
-
 const v$ = useVuelidate(rules, state);
 
 const formLoginData = () => {
@@ -97,9 +97,14 @@ const fetchApi = (data) => {
     data: data,
   })
     .then(function (response) {
-      store.user = response.data.data.user;
-      emit("closeLoginModal");
-      alert(response.data.message);
+      if (response.data.data.user.username === "Admin") {
+        store.admin = response.data.data.user;
+        alert(response.data.message);
+      } else {
+        alert("error email or password");
+        state.email = "";
+        state.password = "";
+      }
     })
     .catch(function (error) {
       alert(error.message + ", Please try again");
@@ -111,8 +116,6 @@ const fetchApi = (data) => {
       loading.value = false;
     });
 };
-
-const emit = defineEmits(["closeLoginModal"]);
 </script>
 
 <style>
