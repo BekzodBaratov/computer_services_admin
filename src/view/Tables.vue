@@ -46,7 +46,7 @@
         <div class="flex">
           <div class="relative">
             <select
-              class="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              class="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             >
               <option>5</option>
               <option>10</option>
@@ -62,7 +62,7 @@
 
           <div class="relative">
             <select
-              class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500"
+              class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500"
             >
               <option>All</option>
               <option>Active</option>
@@ -125,11 +125,7 @@
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <img
-                        class="w-full h-full rounded-full"
-                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                        alt=""
-                      />
+                      <img class="w-full h-full rounded-full" src="" alt="" />
                     </div>
 
                     <div class="ml-3">
@@ -154,11 +150,7 @@
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <img
-                        class="w-full h-full rounded-full"
-                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                        alt=""
-                      />
+                      <img class="w-full h-full rounded-full" src="" alt="" />
                     </div>
                     <div class="ml-3">
                       <p class="text-gray-900 whitespace-no-wrap">Blake Bowman</p>
@@ -182,11 +174,7 @@
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <img
-                        class="w-full h-full rounded-full"
-                        src="https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                        alt=""
-                      />
+                      <img class="w-full h-full rounded-full" src="" alt="" />
                     </div>
                     <div class="ml-3">
                       <p class="text-gray-900 whitespace-no-wrap">Dana Moore</p>
@@ -210,11 +198,7 @@
                 <td class="px-5 py-5 bg-white text-sm">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <img
-                        class="w-full h-full rounded-full"
-                        src="https://images.unsplash.com/photo-1522609925277-66fea332c575?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&h=160&w=160&q=80"
-                        alt=""
-                      />
+                      <img class="w-full h-full rounded-full" src="" alt="" />
                     </div>
                     <div class="ml-3">
                       <p class="text-gray-900 whitespace-no-wrap">Alonzo Cox</p>

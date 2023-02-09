@@ -20,53 +20,78 @@
     </div>
 
     <nav class="mt-10">
-      <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="/">
+      <RouterLink @click="handleNav('/')"
+        class="flex items-center px-6 py-2 mt-4 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+        :class="routePath == '/' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'" to="/">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
         </svg>
-
         <span class="mx-3">Dashboard</span>
-      </a>
+      </RouterLink>
+      <RouterLink @click="handleNav('/users')"
+        class="flex items-center px-6 py-2 mt-4 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+        :class="routePath == '/users' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'" to="/users">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+        </svg>
+        <span class="mx-3">Users</span>
+      </RouterLink>
 
-      <router-link
+      <RouterLink @click="handleNav('/ui-elements')"
         class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-        to="/products">
+        :class="routePath == '/ui-elements' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'"
+        to="/ui-elements">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
         </svg>
 
-        <span class="mx-3">Products</span>
-      </router-link>
+        <span class="mx-3">UI Elements</span>
+      </RouterLink>
 
-      <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-        href="/tables">
+      <RouterLink @click="handleNav('/tables')"
+        class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+        :class="routePath == '/tables' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'" to="/tables">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
         </svg>
 
         <span class="mx-3">Tables</span>
-      </a>
+      </RouterLink>
 
-      <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-        href="/forms">
+      <RouterLink @click="handleNav('/forms')"
+        class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+        :class="routePath == '/forms' ? 'text-gray-100 bg-opacity-25 bg-gray-700' : 'text-gray-500'" to="/forms">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
         </svg>
 
         <span class="mx-3">Forms</span>
-      </a>
+      </RouterLink>
     </nav>
   </div>
 </template>
 <script setup>
 import { ref } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+let routePath;
 
 const emit = defineEmits(["closeSidebar"]);
 const props = defineProps(["sidebarOpen"]);
+
+const handleNav = (path) => {
+  routePath = route.path;
+  // console.log(routePath);
+  console.log(path == routePath);
+};
 </script>
