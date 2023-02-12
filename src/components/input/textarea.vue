@@ -13,7 +13,7 @@ import {ref,watch} from "vue";
 
 const props = defineProps({
   modelValue: {
-    type: Number,
+    type: String || Number,
     required: true,
   },
 

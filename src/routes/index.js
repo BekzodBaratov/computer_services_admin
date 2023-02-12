@@ -4,7 +4,7 @@ import Login from "../view/LoginView.vue";
 import Users from "../view/Users.vue";
 import Forms from "../view/Forms.vue";
 import Tables from "../view/Tables.vue";
-import UIElements from "../view/UI-elements.vue";
+import productEdit from "../view/ProductsEdit.vue";
 import ProductsView from "../view/ProductsView.vue"
 
 const routes = [
@@ -34,9 +34,9 @@ const routes = [
     component: Tables,
   },
   {
-    path: "/ui-elements",
+    path: "/product-edit",
     name: "UI Elements",
-    component: UIElements,
+    component: productEdit,
   },
  
 ];

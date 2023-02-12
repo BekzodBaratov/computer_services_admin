@@ -21,16 +21,6 @@
 
     <Textarea v-model="form.description" placeholder="Qisqacha sharhi" />
 
-
-
-
-
-
-
-
-
-
-
     <button type="submit" @click="handleSubmit"
       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
       Saqlash</button>
@@ -102,7 +92,7 @@ const fetchData = (data) => {
   }).then((res) => {
     toast.success(res.data.message)
   }).catch((err) => {
-    toast.error(err.data.error)
+    toast.error(err.message)
   }).finally(() => {
     form.name = ""
     form.price = ""
