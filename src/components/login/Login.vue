@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
-    <div v-if="!store.isRegisteration" class="fixed z-[999999] inset-0 bg-[#0006] backdrop-blur-md"></div>
-    <div v-if="!store.isRegisteration" class="fixed z-[999999] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div v-if="store.isRegisteration" class="fixed z-[999999] inset-0 bg-[#0006] backdrop-blur-md"></div>
+    <div v-if="store.isRegisteration" class="fixed z-[999999] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="loginModalbg p-16 text-[#F4F6F9] text-lg">
         <div class="flex flex-col gap-6">
           <img class="w-28 self-center mb-8" src="../../assets/logo.png" alt="" />

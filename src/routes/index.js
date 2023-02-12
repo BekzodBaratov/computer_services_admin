@@ -5,6 +5,7 @@ import Users from "../view/Users.vue";
 import Forms from "../view/Forms.vue";
 import Tables from "../view/Tables.vue";
 import UIElements from "../view/UI-elements.vue";
+import ProductsView from "../view/ProductsView.vue"
 
 const routes = [
   {
@@ -25,7 +26,7 @@ const routes = [
   {
     path: "/forms",
     name: "Forms",
-    component: Forms,
+    component: ProductsView,
   },
   {
     path: "/tables",
@@ -37,6 +38,7 @@ const routes = [
     name: "UI Elements",
     component: UIElements,
   },
+ 
 ];
 
 const router = createRouter({
