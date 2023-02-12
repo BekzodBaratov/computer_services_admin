@@ -2,46 +2,38 @@
 
   <form method="POST">
 
-    <div class="mb-6">
-      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-      <input type="text" id="password" v-model="form.name"
-        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+    <div class="flex w-full gap-10">
+      <ProductInput v-model="form.name"  placeholder="Nomi" />
+      <ProductInput v-model="form.price" input-type="number"  placeholder="Narxi" />
     </div>
-    <div class="mb-6">
-      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-      <input type="number" id="password" v-model="form.price"
-        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-    </div>
-    <div class="mb-6">
-      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">description</label>
-      <input type="text" id="password" v-model="form.description"
-        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-    </div>
-    <div class="mb-6">
-      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">colors</label>
-      <input type="text" id="password" v-model="form.colors"
-        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-    </div>
-    <div class="mb-6">
-      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">colors</label>
-      <input type="text" id="password" v-model="form.condition"
-        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+
+    <div class="flex w-full gap-10">
+      <ProductInput v-model="form.colors"  placeholder="Rangi" />
+      <ProductInput v-model="form.condition"   placeholder="Holati" />
     </div>
 
 
-
-    <label class="block  mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload
-      file</label>
+    <label class="block  my-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Rasm yuklash
+      </label>
     <input
-      class="block mb-6  w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-      aria-describedby="user_avatar_help" id="user_avatar" type="file" ref="file" @change="getFile($event)">
+        class="block mb-6  w-full text-sm p-2.5 text-gray-900 border border-gray-300 rounded-[6px] cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        aria-describedby="user_avatar_help" id="user_avatar" type="file" ref="file" @change="getFile($event)">
+
+    <Textarea v-model="form.description" placeholder="Qisqacha sharhi" />
+
+
+
+
+
+
+
 
 
 
 
     <button type="submit" @click="handleSubmit"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save
-      a new product</button>
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Saqlash</button>
   </form>
 
 </template>
@@ -50,6 +42,9 @@
 import { reactive, ref } from "@vue/reactivity";
 import axios from "axios";
 import { useToast } from "vue-toastification";
+import ProductInput from "../components/input/productInput.vue";
+import Textarea from "../components/input/textarea.vue";
+
 const toast = useToast()
 
 
@@ -95,6 +90,7 @@ const handleSubmit = (e) => {
 
 const getFile = (event) => {
   form.imageFiles = event.target.files[0];
+  console.log(form,"fomrm ele")
 }
 
 const fetchData = (data) => {
