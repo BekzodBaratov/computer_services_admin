@@ -2,10 +2,11 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../view/HomeView.vue";
 import Login from "../view/LoginView.vue";
 import Services from "../view/service/Services.vue";
-import Tables from "../view/Tables.vue";
+import ServiceAdd from "../view/service/AddService.vue";
 import products from "../view/products/Products.vue";
 import ProductAdd from "../view/products/ProductsAdd.vue"
 import Forms from "../view/Forms.vue";
+import Tables from "../view/Tables.vue";
 
 const routes = [
   {
@@ -22,6 +23,11 @@ const routes = [
     path: "/services",
     name: "service",
     component: Services,
+  },
+  {
+    path: "/service_add",
+    name: "ServiceAdd",
+    component: ServiceAdd,
   },
   {
     path: "/products",

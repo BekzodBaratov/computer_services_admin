@@ -1,9 +1,8 @@
 <template>
-  <h2 class="text-5xl font-semibold text-gray-700 leading-tight">Services</h2>
-  <div class="mt-8">
-    <div class="mt-6">
-     
-
+  <div class="w-full flex justify-end my-2 mb-4">
+    <router-link to="/service_add" class="btn btn-gray cursor-pointer">Yangi service qo'shish</router-link>
+   </div>
+  <div class="">
       <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
           <table class="min-w-full leading-normal">
@@ -145,6 +144,6 @@
           </div>
         </div>
       </div>
-    </div>
+    
   </div>
 </template>
