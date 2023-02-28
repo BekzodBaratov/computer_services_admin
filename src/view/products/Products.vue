@@ -26,6 +26,10 @@
      </div>
    </div>
  
+   <div class="w-full flex justify-end my-2 mb-4">
+    <router-link to="/product_add" class="btn btn-gray cursor-pointer">Yangi product qo'shish</router-link>
+   </div>
+
    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -102,8 +106,8 @@
  import {onMounted} from "@vue/runtime-core";
  import {ref} from "vue";
  import { useToast } from "vue-toastification";
- import  numberFunction  from "../helpers/formatNumber";
- import formatDate from "../helpers/formatDate";
+ import  numberFunction  from "../../helpers/formatNumber";
+ import formatDate from "../../helpers/formatDate";
  
  const toast = useToast()
  const productsList = ref([])

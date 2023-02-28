@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../view/HomeView.vue";
 import Login from "../view/LoginView.vue";
-import Users from "../view/Users.vue";
+import CreateService from "../view/service/CreateService.vue";
 import Forms from "../view/Forms.vue";
 import Tables from "../view/Tables.vue";
-import productEdit from "../view/ProductsEdit.vue";
-import ProductsView from "../view/ProductsView.vue"
+import products from "../view/products/Products.vue";
+import ProductAdd from "../view/products/ProductsAdd.vue"
 
 const routes = [
   {
@@ -19,14 +19,14 @@ const routes = [
     component: Login,
   },
   {
-    path: "/users",
-    name: "users",
-    component: Users,
+    path: "/add_service",
+    name: "service",
+    component: CreateService,
   },
   {
-    path: "/forms",
-    name: "Forms",
-    component: ProductsView,
+    path: "/product_add",
+    name: "ProductAdd",
+    component: ProductAdd,
   },
   {
     path: "/tables",
@@ -34,9 +34,9 @@ const routes = [
     component: Tables,
   },
   {
-    path: "/product-edit",
-    name: "UI Elements",
-    component: productEdit,
+    path: "/products",
+    name: "Products",
+    component: products,
   },
  
 ];

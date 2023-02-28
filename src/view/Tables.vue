@@ -40,7 +40,7 @@
     <h4 class="text-gray-600">Table with pagination</h4>
 
     <div class="mt-6">
-      <h2 class="text-xl font-semibold text-gray-700 leading-tight">Users</h2>
+      <h2 class="text-xl font-semibold text-gray-700 leading-tight">Service qo'shish</h2>
 
       <div class="mt-3 flex flex-col sm:flex-row">
         <div class="flex">
