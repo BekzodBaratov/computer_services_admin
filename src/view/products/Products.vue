@@ -35,6 +35,9 @@
        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
        <tr>
          <th scope="col" class="p-4">
+           ID:
+         </th>
+         <th scope="col" class="p-4">
            Rasmi
          </th>
          <th scope="col" class="px-6 py-3">
@@ -43,9 +46,9 @@
          <th scope="col" class="px-6 py-3">
            Rangi
          </th>
-         <th scope="col" class="px-6 py-3">
+         <!-- <th scope="col" class="px-6 py-3">
            Kategoriya ID
-         </th>
+         </th> -->
          <th scope="col" class="px-6 py-3">
            Vaziyati
          </th>
@@ -55,9 +58,6 @@
          <th scope="col" class="px-6 py-3">
            Narxi
          </th>
-         <!-- <th scope="col" class="px-6 py-3">
-           Weight
-         </th> -->
          <th scope="col" class="px-6 py-3">
            Amallar
          </th>
@@ -65,6 +65,9 @@
        </thead>
        <tbody>
        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" v-for="item,index in productsList" :key="index">
+         <td class="w-4 p-4">
+           <p class="font-bold">{{ item.id }}.</p>
+         </td>
          <td class="w-4 p-4">
            <img :src="item.image_url" alt="images" class="w-full h-full">
          </td>
@@ -74,9 +77,9 @@
          <td class="px-6 py-4">
            {{item.product_detail.colors}}
          </td>
-         <td class="px-6 py-4">
+         <!-- <td class="px-6 py-4">
            {{item.categoryId}}
-         </td>
+         </td> -->
          <td class="px-6 py-4">
            {{item.product_detail.condition ? 'Bor' : 'Yo`q'}}
          </td>
@@ -86,9 +89,7 @@
          <td class="px-6 py-4">
            {{numberFunction(item.product_detail.price)}} UZS
          </td>
-         <!-- <td class="px-6 py-4">
-           3.0 lb.
-         </td> -->
+  
          <td class="flex items-center px-6 py-4 space-x-3">
            <router-link to="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</router-link>
            <div class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer" @click="productDelete(item.id)">Delete</div>

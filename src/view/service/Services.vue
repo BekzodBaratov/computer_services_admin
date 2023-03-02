@@ -3,134 +3,89 @@
     <router-link to="/service_add" class="btn btn-gray cursor-pointer">Yangi service qo'shish</router-link>
    </div>
   <div class="">
+    <!-- <pre>{{ serviceList }}</pre> -->
       <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
           <table class="min-w-full leading-normal">
-            <thead>
-              <tr>
-                <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                >
-                  User
-                </th>
-                <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                >
-                  Rol
-                </th>
-                <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                >
-                  Created at
-                </th>
-                <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                >
-                  Status
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 w-10 h-10">
-                      <img class="w-full h-full rounded-full" src="" alt="" />
-                    </div>
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+       <tr>
+    
+         <th scope="col" class="p-4">
+           Rasmi
+         </th>
+         <th scope="col" class="px-6 py-3">
+           Service
+         </th>
+  
+      
+         
+       
+         <th scope="col" class="px-6 py-3 ">
+           Tel raqam:
+         </th>
 
-                    <div class="ml-3">
-                      <p class="text-gray-900 whitespace-no-wrap">Vera Carpenter</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">Jan 21, 2020</p>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                    <span class="relative">Activo</span>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 w-10 h-10">
-                      <img class="w-full h-full rounded-full" src="" alt="" />
-                    </div>
-                    <div class="ml-3">
-                      <p class="text-gray-900 whitespace-no-wrap">Blake Bowman</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">Editor</p>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">Jan 01, 2020</p>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                    <span class="relative">Activo</span>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 w-10 h-10">
-                      <img class="w-full h-full rounded-full" src="" alt="" />
-                    </div>
-                    <div class="ml-3">
-                      <p class="text-gray-900 whitespace-no-wrap">Dana Moore</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">Editor</p>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">Jan 10, 2020</p>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                    <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
-                    <span class="relative">Suspended</span>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 w-10 h-10">
-                      <img class="w-full h-full rounded-full" src="" alt="" />
-                    </div>
-                    <div class="ml-3">
-                      <p class="text-gray-900 whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-gray-900 whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                    <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                    <span class="relative">Inactive</span>
-                  </span>
-                </td>
-              </tr>
+         <th scope="col" class="px-6 py-3  text-left">
+           Muommolar
+         </th>
+         <th scope="col" class="px-6 py-3 text-left">
+          features
+         </th>
+
+         <th scope="col" class="px-6 py-3 ">
+           Qisqacha
+         </th>
+
+         <th scope="col" class="px-6 py-3 ">
+           Qo'shilgan vaqti
+         </th>
+      
+         <th scope="col" class="px-6 py-3">
+           Amallar
+         </th>
+       </tr>
+       </thead>
+            <tbody>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" v-for="item,index in serviceList" :key="index">
+     
+         <td class="w-4 p-4">
+           <img :src="item.image_url" alt="images" class="w-full h-full">
+         </td>
+         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {{item.name}}
+         </th>
+       
+
+          <th scope="row" class="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+           {{item?.phone}}
+          </th>
+
+          <th scope="row" class="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white flex justify-start">
+           <ul class="text-left">
+            <li v-for="el,index in item.resolve_problems" :key="el"><span class="font-medium">{{ index+1 }}. &nbsp;</span>{{el}}</li>
+           </ul>
+          </th>
+          <th scope="row" class="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white  justify-start">
+           <ul class="text-left">
+            <li v-for="el,index in item.features" :key="el"><span class="font-medium">{{ index+1 }}. &nbsp;</span>{{el}}</li>
+           </ul>
+          </th>
+
+          <th scope="row" class="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+           {{item?.description}}
+          </th>
+
+          <td class="px-6 py-4">
+           {{ formatDate(item.createdAt) }}
+          </td>
+    
+         <td class="flex items-center justify-center px-6 py-4 space-x-3">
+           <router-link to="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</router-link>
+           <div class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer" @click="productDelete(item.id)">Delete</div>
+         </td>
+       </tr>
             </tbody>
           </table>
-          <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
+          <!-- <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
             <span class="text-xs xs:text-sm text-gray-900">Showing 1 to 4 of 50 Entries</span>
 
             <div class="inline-flex mt-2 xs:mt-0">
@@ -141,9 +96,63 @@
                 Next
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     
   </div>
 </template>
+
+<script setup>
+ import axios from "axios";
+ import {onMounted} from "@vue/runtime-core";
+ import {ref} from "vue";
+ import { useToast } from "vue-toastification";
+ import  numberFunction  from "../../helpers/formatNumber";
+ import formatDate from "../../helpers/formatDate";
+ 
+ const toast = useToast()
+ const serviceList = ref([])
+ 
+ const fetchProductsList = () =>{
+   axios({
+     method : "GET",
+     url : "/services",
+     withCredentials: true,
+   }).then((res) =>{
+     serviceList.value = res.data.data.services
+   })
+ }
+ 
+ const productDelete = (id) =>{
+ 
+   const modal = document.getElementById("popup-modal");
+   const agree = document.getElementById("agree");
+   const cancel = document.getElementById("cancel")
+   modal.classList.add('modal-class')
+ 
+   cancel.addEventListener("click", () => {
+     modal.classList.remove('modal-class')
+   })
+ 
+   const reallyDelete = () => {
+     modal.classList.remove('modal-class')
+     axios({
+       methods: "DELETE",
+       url: `services/${id}`,
+       headers: {},
+       withCredentials: true,
+     }).then((res) => {
+       console.log(res)
+       toast.success(res.data.message)
+     })
+   }
+ 
+   agree.addEventListener("click", reallyDelete)
+ }
+ 
+ onMounted(() => {
+   fetchProductsList()
+ })
+ </script>
+ 
