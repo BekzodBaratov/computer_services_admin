@@ -78,9 +78,11 @@
            {{ formatDate(item.createdAt) }}
           </td>
     
-         <td class="flex items-center justify-center px-6 py-4 space-x-3">
-           <router-link to="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</router-link>
-           <div class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer" @click="productDelete(item.id)">Delete</div>
+         <td class=" px-6 py-4 ">
+          <div class="flex gap-4">
+            <router-link to="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><i class="fa-solid fa-pen-to-square text-[blue] text-[20px]"></i></router-link>
+            <div class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer" @click="productDelete(item.id)"><i class="fa-solid fa-trash text-[red] text-[20px]"></i></div>
+          </div>
          </td>
        </tr>
             </tbody>

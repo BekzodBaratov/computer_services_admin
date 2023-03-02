@@ -7,10 +7,7 @@
       <ProductInput v-model="form.phone" input-type="number" placeholder="+998995491111"  label="Tel raqam" />
     </div>
 
-    <!-- <div class="flex w-full gap-10">
-      <ProductInput v-model="form.colors"  label="Rangi" placeholder="black" />
-      <ProductInput v-model="form.condition"   label="Holati" />
-    </div> -->
+
 
 
     <label class="block  my-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Rasm yuklash
@@ -18,6 +15,13 @@
     <input
         class="block mb-6  w-full text-sm p-2.5 text-gray-900 border border-gray-300 rounded-[6px] cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:label-gray-400"
         aria-describedby="user_avatar_help" id="user_avatar" type="file" ref="file" @change="getFile($event)">
+
+
+        <!-- to do -->
+        <p>Task editor</p>
+        <i class="fa-solid fa-trash text-[red]"></i>
+        <i class="fa-solid fa-pen-to-square text-[blue]"></i>
+
 
     <Textarea v-model="form.description" placeholder="Qisqacha sharhi" />
 
@@ -62,7 +66,7 @@ const handleSubmit = (e) => {
   if (form.imageFiles) {
     let phoneNumber = '+' + String(form.phone)
     let formData = new FormData();
-    formData.append('imageFiles', form.imageFiles);
+    formData.append('image', form.imageFiles);
     formData.append('name', form.name);
     formData.append('phone', phoneNumber);
     formData.append('description', form.description);
