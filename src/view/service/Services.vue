@@ -3,7 +3,7 @@
     <router-link to="/service_add" class="btn btn-gray cursor-pointer">Yangi service qo'shish</router-link>
    </div>
   <div class="">
-    <pre>{{ serviceList }}</pre>
+    <!-- <pre>{{ serviceList }}</pre> -->
       <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
           <table class="min-w-full leading-normal">
@@ -48,7 +48,7 @@
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" v-for="item,index in serviceList" :key="index">
      
          <td class="w-4 p-4">
-           <img :src="item.image_url" alt="images" class="w-full h-full">
+           <img :src="item.image_url" alt="images" class="w-full h-[40px]">
          </td>
          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
           {{item.name}}

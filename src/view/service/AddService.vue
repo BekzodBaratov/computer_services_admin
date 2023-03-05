@@ -24,6 +24,32 @@
      </div>
    </div>
 
+   <!-- modal 2 -->
+   <div id="popup-modal2"
+     class="fixed  top-0 hidden items-center justify-center  z-50  p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full h-[100vh] ">
+     <div class="relative w-full h-full max-w-md md:h-auto mx-auto ">
+       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <p class="py-2 px-3 font-medium">Tahrirlash:</p>
+      
+         <div class="px-4 py-2 text-center w-full">
+          <form class="border mb-4">
+            <textarea type="text" class="w-full  h-[80px] outline-none p-2 resize-none" v-model="editProblemText"></textarea>
+          </form>
+          <div class="flex justify-end">
+           <button id="cancel2" @click="cancelModal2"
+             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+             Bekor qilish
+           </button>
+           <button id="agree2" @click="editModal2"
+             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 btn  dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+             Saqlash</button>
+         </div>
+        </div>
+       </div>
+     </div>
+   </div>
+
+
   <form method="POST">
 
     <div class="flex w-full gap-10">
@@ -55,6 +81,24 @@
           </div>
         </div>
 
+        <!-- resolve problem -->
+
+        <div class="mb-4 mt-2">
+          <p>Muommolar qo'shish:</p>
+          <div class="w-full my-3">
+            <form class="w-full" @submit="addProblem">
+            <input type="text" v-model="problem" class="w-full rounded-md h-[40px] px-4 outline-none" placeholder="Muommolar qo'shish">
+          </form>
+          <div class="my-2 w-full bg-white p-2 flex justify-between" v-for="item,ind in form.resolve_problems" :key="ind">
+            <div><span class="font-medium mr-2">{{ ind+1 }}.</span>{{item}}</div>
+            <div class="flex items-center justify-end gap-3 flex-shrink-0 max-w-[200px] w-full">
+              <i class="fa-solid fa-pen-to-square text-[blue] cursor-pointer" @click="editProblem(ind)"></i>
+              <i class="fa-solid fa-trash text-[red] cursor-pointer" @click="deleteProblem(ind)"></i>
+            </div>
+          </div>
+          </div>
+        </div>
+
 
     <Textarea v-model="form.description" placeholder="Qisqacha sharhi" />
 
@@ -77,6 +121,9 @@ const toast = useToast()
 
 const service = ref("")
 const editServiceText = ref("")
+const editProblemText = ref("")
+
+const problem = ref("")
 
 
 const form = reactive({
@@ -90,13 +137,14 @@ const form = reactive({
   "A'lo darajada xizmat ko'rsatamiz!"
   ],
   resolve_problems: [
-  "Valisher","Botirov"
+  "Test uchun",
   ]
 
 
 })
 
 
+// add service
 
 function addService(e){
   e.preventDefault();
@@ -118,7 +166,6 @@ function editService(id){
   modal.classList.add('modal-class')
   let name = form.features[id];
   editServiceText.value = name
-  
 }
 
 function cancelModal(){
@@ -132,6 +179,41 @@ function editModal(){
   form.features[idEdit.value] = editServiceText.value  
 }
 
+// resolve propblem
+
+function cancelModal2(){
+  const modal = document.getElementById("popup-modal2");
+  modal.classList.remove('modal-class')
+}
+
+function editModal2(){
+  const modal = document.getElementById("popup-modal2");
+  modal.classList.remove('modal-class')
+  form.resolve_problems[idEdit.value] = editProblemText.value  
+}
+
+function addProblem (e){
+  e.preventDefault();
+  if(problem.value !== ""){
+    form.resolve_problems.push(problem.value)
+    problem.value = ""
+  }
+}
+
+function deleteProblem(id){
+  form.resolve_problems = form.resolve_problems.filter((el,item) => item !== id)
+}
+
+function editProblem(id){
+  idEdit.value = id
+  const modal = document.getElementById("popup-modal2");
+  modal.classList.add('modal-class')
+  let name = form.resolve_problems[id];
+  editProblemText.value = name
+}
+
+// submit form
+
 const handleSubmit = (e) => {
   e.preventDefault();
 
@@ -142,8 +224,8 @@ const handleSubmit = (e) => {
     formData.append('name', form.name);
     formData.append('phone', phoneNumber);
     formData.append('description', form.description);
-    formData.append('resolve_problems', form.resolve_problems);
-    formData.append('features', form.features);
+    formData.append('resolve_problems', JSON.stringify(form.resolve_problems));
+    formData.append('features', JSON.stringify(form.features));
     fetchData(formData)
 
   }
@@ -171,9 +253,13 @@ const fetchData = (data) => {
     form.description = ""
     form.imageFiles = ""
     form.specifications = {}
+    setTimeout(() =>{
+      window.location.reload()
+    },2000)
   })
 
 }
+
 
 </script>
 

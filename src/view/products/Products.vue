@@ -69,7 +69,7 @@
            <p class="font-bold">{{ item.id }}.</p>
          </td>
          <td class="w-4 p-4">
-           <img :src="item.image_url" alt="images" class="w-full h-full">
+           <img :src="item.image_url" alt="images" class="w-[50px] h-[40px] object-cover">
          </td>
          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
           {{item.name}}
