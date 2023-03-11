@@ -132,18 +132,20 @@
  
    cancel.addEventListener("click", () => {
      modal.classList.remove('modal-class')
+     
    })
  
    const reallyDelete = () => {
      modal.classList.remove('modal-class')
-     axios({
-       methods: "DELETE",
-       url: `products/${id}`,
+     const params = {
        headers: {},
        withCredentials: true,
-     }).then((res) => {
-       console.log(res)
-       toast.success(res.data.message)
+     }
+     axios.delete(`products/${id}`,{params}).then((res) => {
+       toast.success("Mahsulot muvaffaqiyatli o'chirildi");
+       fetchProductsList()
+     }).catch((res)=>{
+      toast.error("Xatolik yuz berdi")
      })
    }
  

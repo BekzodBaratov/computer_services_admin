@@ -245,19 +245,17 @@ const fetchData = (data) => {
     data: data,
   }).then((res) => {
     toast.success(res.data.message)
-  }).catch((err) => {
-    toast.error(err.message)
-  }).finally(() => {
     form.name = ""
     form.phone = ""
     form.description = ""
     form.imageFiles = ""
     form.specifications = {}
-    setTimeout(() =>{
-      window.location.reload()
-    },2000)
+    // setTimeout(() =>{
+    //   window.location.reload()
+    // },2000)
+  }).catch((err) => {
+    toast.error(err.message)
   })
-
 }
 
 

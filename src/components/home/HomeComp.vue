@@ -217,12 +217,11 @@ const deleteUser = (id) => {
 
   const reallyDelete = () => {
     modal.classList.remove('modal-class')
-    axios({
-      methods: "DELETE",
-      url: `users/${id}`,
+    const params = {
       headers: {},
       withCredentials: true,
-    }).then((res) => {
+    }
+    axios.delete(`users/${id}`,{params}).then((res) => {
       console.log(res)
       toast.success(res.data.message)
     })

@@ -1,4 +1,30 @@
 <template>
+
+   <!-- modal -->
+   <div id="popup-modal"
+     class="fixed  top-0 hidden items-center justify-center  z-50  p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full h-[100vh] ">
+     <div class="relative w-full h-full max-w-md md:h-auto mx-auto ">
+       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+ 
+         <div class="p-6 text-center">
+           <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none"
+             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+               d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+           </svg>
+           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Haqiqatdan ham bu mahsulotni o'chirmoqchimisiz?</h3>
+           <button id="agree"
+             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+             Ha,men roziman
+           </button>
+           <button id="cancel"
+             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Yoq,
+             Bekor qilish</button>
+         </div>
+       </div>
+     </div>
+   </div>
+
   <div class="w-full flex justify-end my-2 mb-4">
     <router-link to="/service_add" class="btn btn-gray cursor-pointer">Yangi service qo'shish</router-link>
    </div>
@@ -16,10 +42,6 @@
          <th scope="col" class="px-6 py-3">
            Service
          </th>
-  
-      
-         
-       
          <th scope="col" class="px-6 py-3 ">
            Tel raqam:
          </th>
@@ -127,7 +149,7 @@
  }
  
  const productDelete = (id) =>{
- 
+ console.log(id,"id")
    const modal = document.getElementById("popup-modal");
    const agree = document.getElementById("agree");
    const cancel = document.getElementById("cancel")
@@ -139,14 +161,22 @@
  
    const reallyDelete = () => {
      modal.classList.remove('modal-class')
-     axios({
-       methods: "DELETE",
-       url: `services/${id}`,
-       headers: {},
-       withCredentials: true,
-     }).then((res) => {
+     const params = {
+      headers: {},
+      withCredentials: true,
+    }
+    // {
+    //    methods: "DELETE",
+    //    url: `services/${id}`,
+    //    headers: {},
+    //    withCredentials: true,
+    //  }
+     axios.delete(`services/${id}`,{params}).then((res) => {
        console.log(res)
-       toast.success(res.data.message)
+       toast.success("Muvaffaqiyatli o'chirildi")
+       fetchProductsList()
+     }).catch((res)=>{
+      toast.error("Xatolik yuz berdi")
      })
    }
  
@@ -158,3 +188,11 @@
  })
  </script>
  
+
+ <style scoped>
+ .modal-class {
+   overflow: visible;
+   display: flex;
+   backdrop-filter: blur(6px);
+ }
+ </style>
