@@ -4,7 +4,8 @@ import Login from "../view/LoginView.vue";
 import Services from "../view/service/Services.vue";
 import ServiceAdd from "../view/service/AddService.vue";
 import products from "../view/products/Products.vue";
-import ProductAdd from "../view/products/ProductsAdd.vue"
+import ProductAdd from "../view/products/ProductsAdd.vue";
+import ProductEdit from "../view/products/ProductsEdit.vue";
 import Forms from "../view/Forms.vue";
 import Tables from "../view/Tables.vue";
 
@@ -35,6 +36,11 @@ const routes = [
     component: products,
   },
   {
+    path: "/products/:id",
+    name: "ProductsEdit",
+    component: ProductEdit,
+  },
+  {
     path: "/product_add",
     name: "ProductAdd",
     component: ProductAdd,
@@ -44,8 +50,6 @@ const routes = [
     name: "Tables",
     component: Tables,
   },
-
- 
 ];
 
 const router = createRouter({
