@@ -1,3 +1,3 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://plankton-app-vomkh.ondigitalocean.app/api/v1/";
+axios.defaults.baseURL = "http://64.226.69.232:8000/api/v1/";
