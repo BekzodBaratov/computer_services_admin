@@ -106,9 +106,12 @@ const fetchData = (data) => {
 
 function handleSubmit(e) {
   e.preventDefault();
-  // console.log(productList.value, "new");
+  console.log(productList, "product list");
+  const fetchObj = {
+    name: productList.value?.product?.name,
+  };
   const params = {
-    data: { productList },
+    data: { fetchObj },
     withCredentials: true,
   };
   axios.patch(`/products/${route.params.id}`, { params }).then((res) => {
