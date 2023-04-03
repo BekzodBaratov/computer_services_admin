@@ -51,6 +51,7 @@ const toast = useToast();
 
 const form = reactive({
   category_id: 1,
+  configuration_id: 1,
   name: "",
   description: "",
   condition: "",
@@ -74,6 +75,7 @@ const handleSubmit = (e) => {
     let formData = new FormData();
     formData.append("imageFiles", form.imageFiles);
     formData.append("category_id", form.category_id);
+    formData.append("configuration_id", form.configuration_id);
     formData.append("name", form.name);
     formData.append("price", form.price);
     formData.append("description", form.description);
