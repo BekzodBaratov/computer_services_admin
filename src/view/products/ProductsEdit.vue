@@ -1,7 +1,6 @@
 <template>
   <div>
     <h2 class="text-[20px] font-semibold">Mahsulotlarni tahrirlash bo'limi</h2>
-    <!-- <pre>{{ name }}</pre> -->
     <!-- <pre>{{ productList.product }}</pre> -->
     <form method="POST" v-if="isMount">
       <div class="flex w-full gap-10">
@@ -67,7 +66,7 @@ const route = useRoute();
 
 const productList = ref([]);
 // const name = computed(() => productList.value.product?.name);
-const name = ref("test");
+
 const form = reactive({
   category_id: 1,
   name: "Valisher",
