@@ -6,8 +6,6 @@ import ServiceAdd from "../view/service/AddService.vue";
 import products from "../view/products/Products.vue";
 import ProductAdd from "../view/products/ProductsAdd.vue";
 import ProductEdit from "../view/products/ProductsEdit.vue";
-import Forms from "../view/Forms.vue";
-import Tables from "../view/Tables.vue";
 
 const routes = [
   {
@@ -44,11 +42,6 @@ const routes = [
     path: "/product_add",
     name: "ProductAdd",
     component: ProductAdd,
-  },
-  {
-    path: "/tables",
-    name: "Tables",
-    component: Tables,
   },
 ];
 
