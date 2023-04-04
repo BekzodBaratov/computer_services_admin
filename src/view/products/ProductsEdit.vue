@@ -54,36 +54,19 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-import { reactive, ref } from "@vue/reactivity";
+import { useRoute, useRouter } from "vue-router";
+import { ref } from "@vue/reactivity";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
-import { computed, onMounted } from "vue";
+import { onMounted } from "vue";
 
 const route = useRoute();
+const router = useRouter();
+const toast = useToast();
 
 const productList = ref([]);
-// const name = computed(() => productList.value.product?.name);
-
-const form = reactive({
-  category_id: 1,
-  name: "Valisher",
-  description: "",
-  condition: "",
-  price: "",
-  imageFiles: "",
-  colors: "",
-  specifications: [
-    {
-      name: "Valisher",
-    },
-    {
-      name: "Bekzod",
-    },
-  ],
-});
 
 const isMount = ref(false);
 const fetchData = (data) => {
@@ -94,7 +77,6 @@ const fetchData = (data) => {
     .get(`/products/${route.params.id}`)
     .then((res) => {
       productList.value = res.data.data;
-      form.name = productList.value?.product?.name;
       console.log(res, "res");
       isMount.value = true;
     })
@@ -106,16 +88,29 @@ const fetchData = (data) => {
 function handleSubmit(e) {
   e.preventDefault();
   console.log(productList, "product list");
+  // let formData = new FormData();
   const fetchObj = {
     name: productList.value?.product?.name,
+    price: productList.value?.product?.product_detail?.price,
+    description: productList.value?.product?.product_detail?.description,
+    colors: productList.value?.product?.product_detail?.colors,
   };
-  const params = {
-    data: { fetchObj },
-    withCredentials: true,
-  };
-  axios.patch(`/products/${route.params.id}`, { params }).then((res) => {
-    console.log(res);
-  });
+  // const params = {
+  //   data: { ...fetchObj },
+  //   withCredentials: true,
+  // };
+  axios
+    .patch(`/products/${route.params.id}`, fetchObj)
+    .then((res) => {
+      toast.success("Mahsulot muvaffaqiyatli tahrirlandi");
+      setTimeout(() => {
+        router.push("/products");
+      }, 3000);
+      console.log(res);
+    })
+    .catch((err) => {
+      toast.error("Tahrirlashda xatoli yuz berdi!");
+    });
 }
 
 onMounted(() => {
