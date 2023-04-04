@@ -1,4 +1,5 @@
 <template>
+  <h2 class="text-[20px] font-semibold">Productlarni qo'shish bo'limi</h2>
   <form method="POST">
     <div class="flex w-full gap-10">
       <ProductInput v-model="form.name" placeholder="Nomi" />

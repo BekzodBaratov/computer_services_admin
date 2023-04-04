@@ -3,6 +3,7 @@ import Home from "../view/HomeView.vue";
 import Login from "../view/LoginView.vue";
 import Services from "../view/service/Services.vue";
 import ServiceAdd from "../view/service/AddService.vue";
+import ServiceEdit from "../view/service/EditService.vue";
 import products from "../view/products/Products.vue";
 import ProductAdd from "../view/products/ProductsAdd.vue";
 import ProductEdit from "../view/products/ProductsEdit.vue";
@@ -27,6 +28,11 @@ const routes = [
     path: "/service_add",
     name: "ServiceAdd",
     component: ServiceAdd,
+  },
+  {
+    path: "/service/:id",
+    name: "ServiceEdit",
+    component: ServiceEdit,
   },
   {
     path: "/products",
