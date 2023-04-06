@@ -331,7 +331,6 @@ const fetchData = () => {
       productList.value = res.data.data;
       form.features = productList.value.service.features;
       form.resolve_problems = productList.value.service.resolve_problems;
-      console.log(res, "res");
       isMount.value = true;
     })
     .catch((err) => {
@@ -348,6 +347,7 @@ function handleSubmit(e) {
     features: form.features,
     resolve_problems: form.resolve_problems,
   };
+  console.log(fetchObj, "fetchObj");
   axios
     .patch(`/services/${route.params.id}`, fetchObj)
     .then((res) => {
