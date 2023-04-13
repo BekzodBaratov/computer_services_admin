@@ -23,21 +23,13 @@
         />
       </div>
 
-      <label
-        class="block my-2 text-sm font-medium text-gray-900 dark:text-white"
-        for="user_avatar"
-        >Rasm yuklash
-      </label>
-      <input
-        class="block mb-6 w-full text-sm p-2.5 text-gray-900 border border-gray-300 rounded-[6px] cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        aria-describedby="user_avatar_help"
-        id="user_avatar"
-        type="file"
-        ref="file"
-        @change="getFile($event)"
+      <UploadImages
+        :image="productList.product.image_url"
+        @upload="getImages"
       />
 
       <Textarea
+        class="mt-4"
         v-model="productList.product.product_detail.description"
         placeholder="Qisqacha sharhi"
       />
@@ -55,18 +47,27 @@
 
 <script setup>
 import { useRoute, useRouter } from "vue-router";
-import { ref } from "@vue/reactivity";
+import { ref, reactive } from "@vue/reactivity";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
 import { onMounted } from "vue";
+import UploadImages from "../../components/input/uploadImages.vue";
 
 const route = useRoute();
 const router = useRouter();
 const toast = useToast();
 
 const productList = ref([]);
+
+const form = reactive({
+  imageFiles: "",
+});
+
+function getImages(e) {
+  form.imageFiles = e.file;
+}
 
 const isMount = ref(false);
 const fetchData = (data) => {

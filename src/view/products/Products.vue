@@ -56,7 +56,7 @@
         class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
       >
         <tr>
-          <th scope="col" class="p-4">ID:</th>
+          <th scope="col" class="p-4">#:</th>
           <th scope="col" class="p-4">Rasmi</th>
           <th scope="col" class="px-6 py-3">Nomi</th>
           <th scope="col" class="px-6 py-3">Rangi</th>
@@ -76,7 +76,7 @@
           :key="index"
         >
           <td class="w-4 p-4">
-            <p class="font-bold">{{ item?.id }}.</p>
+            <p class="font-bold">{{ index + 1 }}.</p>
           </td>
           <td class="w-4 p-4">
             <img

@@ -75,9 +75,6 @@
   </div>
 
   <h2 class="text-[20px] font-semibold">Servicelar qo'shish bo'limi</h2>
-  <pre>{{ isMount }}</pre>
-  <pre>{{ productList }}</pre>
-
   <form method="POST" v-if="isMount">
     <div class="flex w-full gap-10">
       <ProductInput
@@ -93,22 +90,10 @@
       />
     </div>
 
-    <label
-      class="block my-2 text-sm font-medium text-gray-900 dark:text-white"
-      for="user_avatar"
-      >Rasm yuklash
-    </label>
-    <input
-      class="block mb-6 w-full text-sm p-2.5 text-gray-900 border border-gray-300 rounded-[6px] cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:label-gray-400"
-      aria-describedby="user_avatar_help"
-      id="user_avatar"
-      type="file"
-      ref="file"
-      @change="getFile($event)"
-    />
+    <UploadImages :image="productList.service.image_url" @upload="getImages" />
 
     <!-- to do -->
-    <p>Servise qo'shish:</p>
+    <p class="mt-4">Servise qo'shish:</p>
     <div class="w-full my-4">
       <form class="w-full" @submit="addService">
         <input
@@ -201,6 +186,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
+import UploadImages from "../../components/input/uploadImages.vue";
 
 const toast = useToast();
 const route = useRoute();
@@ -310,10 +296,9 @@ function editProblem(id) {
 //   }
 // };
 
-const getFile = (event) => {
-  form.imageFiles = event.target.files[0];
-  console.log(form, "fomrm ele");
-};
+function getImages(e) {
+  form.imageFiles = e.file;
+}
 
 // Edit section
 
@@ -321,7 +306,6 @@ const productList = ref([]);
 
 const isMount = ref(false);
 const fetchData = () => {
-  console.log("run is function");
   const params = {
     withCredentials: true,
   };
@@ -347,7 +331,7 @@ function handleSubmit(e) {
     features: form.features,
     resolve_problems: form.resolve_problems,
   };
-  console.log(fetchObj, "fetchObj");
+
   axios
     .patch(`/services/${route.params.id}`, fetchObj)
     .then((res) => {
@@ -360,6 +344,14 @@ function handleSubmit(e) {
     .catch((err) => {
       toast.error("Tahrirlashda xatoli yuz berdi!");
     });
+
+  if (form.imageFiles) {
+    let formData = new FormData();
+    formData.append("image", form.imageFiles);
+    axios.post(`services/update/${route.params.id}`, formData).then((res) => {
+      console.log(res, "images res");
+    });
+  }
 }
 
 onMounted(() => {
