@@ -206,12 +206,6 @@ const productDelete = (id) => {
       headers: {},
       withCredentials: true,
     };
-    // {
-    //    methods: "DELETE",
-    //    url: `services/${id}`,
-    //    headers: {},
-    //    withCredentials: true,
-    //  }
     axios
       .delete(`services/${id}`, { params })
       .then((res) => {

@@ -16,11 +16,16 @@
     </div>
 
     <!-- <pre>{{ category }}e</pre> -->
-    <Select
-      v-if="category.length"
-      :data="category"
-      @getVal="selectVal($event)"
-    />
+    <div class="flex w-full gap-10">
+      <Select
+        class="w-full"
+        v-if="category.length"
+        :data="category"
+        @getVal="selectVal($event)"
+      />
+      <SButton variant="info">Yangi Kategoriya qo'shish</SButton>
+    </div>
+
     <UploadImages @upload="getImages" />
 
     <Textarea
@@ -29,13 +34,9 @@
       class="mt-3"
     />
 
-    <button
-      type="submit"
-      @click="handleSubmit"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    >
+    <SButton variant="primary_dark" type="submit" @click="handleSubmit">
       Saqlash
-    </button>
+    </SButton>
   </form>
 </template>
 
@@ -48,6 +49,7 @@ import Textarea from "../../components/input/textarea.vue";
 import UploadImages from "../../components/input/uploadImages.vue";
 import Select from "../../components/input/select.vue";
 import { onMounted } from "vue";
+import SButton from "../../components/buttons/SButton.vue";
 const toast = useToast();
 
 const form = reactive({
@@ -104,6 +106,9 @@ const fetchData = (data) => {
   })
     .then((res) => {
       toast.success(res.data.message);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     })
     .catch((err) => {
       toast.error(err.message);
