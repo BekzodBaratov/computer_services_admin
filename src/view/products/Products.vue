@@ -49,7 +49,7 @@
       >Yangi product qo'shish</router-link
     >
   </div>
-
+  <!-- <pre>{{ productsList }}</pre> -->
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead
@@ -60,9 +60,7 @@
           <th scope="col" class="p-4">Rasmi</th>
           <th scope="col" class="px-6 py-3">Nomi</th>
           <th scope="col" class="px-6 py-3">Rangi</th>
-          <!-- <th scope="col" class="px-6 py-3">
-           Kategoriya ID
-         </th> -->
+          <th scope="col" class="px-6 py-3">Kategoriya</th>
           <th scope="col" class="px-6 py-3">Vaziyati</th>
           <th scope="col" class="px-6 py-3">Qo'shilgan vaqti</th>
           <th scope="col" class="px-6 py-3">Narxi</th>
@@ -94,9 +92,9 @@
           <td class="px-6 py-4">
             {{ item?.product_detail?.colors }}
           </td>
-          <!-- <td class="px-6 py-4">
-           {{item.categoryId}}
-         </td> -->
+          <td class="px-6 py-4">
+            {{ item?.category?.name }}
+          </td>
           <td class="px-6 py-4">
             {{ item.product_detail?.condition ? "Bor" : "Yo`q" }}
           </td>

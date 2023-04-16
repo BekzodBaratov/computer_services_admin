@@ -15,6 +15,12 @@
       <ProductInput v-model="form.condition" placeholder="Holati" />
     </div>
 
+    <!-- <pre>{{ category }}e</pre> -->
+    <Select
+      v-if="category.length"
+      :data="category"
+      @getVal="selectVal($event)"
+    />
     <UploadImages @upload="getImages" />
 
     <Textarea
@@ -40,11 +46,12 @@ import { useToast } from "vue-toastification";
 import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
 import UploadImages from "../../components/input/uploadImages.vue";
-
+import Select from "../../components/input/select.vue";
+import { onMounted } from "vue";
 const toast = useToast();
 
 const form = reactive({
-  category_id: 2,
+  category_id: null,
   configuration_id: 1,
   name: "",
   description: "",
@@ -61,6 +68,10 @@ const form = reactive({
     },
   ],
 });
+
+function selectVal(e) {
+  form.category_id = e;
+}
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -108,4 +119,16 @@ const fetchData = (data) => {
       form.specifications = {};
     });
 };
+
+const category = ref([]);
+
+function getCategoryList() {
+  axios.get("/categories").then((res) => {
+    category.value = res.data.data.categories;
+  });
+}
+
+onMounted(() => {
+  getCategoryList();
+});
 </script>

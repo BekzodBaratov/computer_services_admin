@@ -98,12 +98,11 @@
 
         <span class="mx-3">Products</span>
       </RouterLink>
-
       <RouterLink
         @click="handleNav('/services')"
-        class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+        class="flex items-center px-6 py-2 mt-4 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
         :class="
-          '/services'
+          `${route.path === '/service'}`
             ? 'text-gray-100 bg-opacity-25 bg-gray-700'
             : 'text-gray-500'
         "
