@@ -88,18 +88,13 @@ const fetchData = (data) => {
 
 function handleSubmit(e) {
   e.preventDefault();
-  console.log(productList, "product list");
-  // let formData = new FormData();
   const fetchObj = {
     name: productList.value?.product?.name,
     price: productList.value?.product?.product_detail?.price,
     description: productList.value?.product?.product_detail?.description,
     colors: productList.value?.product?.product_detail?.colors,
   };
-  // const params = {
-  //   data: { ...fetchObj },
-  //   withCredentials: true,
-  // };
+
   axios
     .patch(`/products/${route.params.id}`, fetchObj)
     .then((res) => {
@@ -112,6 +107,19 @@ function handleSubmit(e) {
     .catch((err) => {
       toast.error("Tahrirlashda xatoli yuz berdi!");
     });
+
+  if (form.imageFiles) {
+    let formData = new FormData();
+    formData.append("image", form.imageFiles);
+    axios
+      .post(`products/update/image/${route.params.id}`, formData)
+      .then((res) => {
+        console.log(res, "images res");
+      })
+      .catch((err) => {
+        toast.error("Rasm yangilashda xatoli berdi!");
+      });
+  }
 }
 
 onMounted(() => {

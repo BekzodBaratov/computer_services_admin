@@ -206,7 +206,7 @@ const form = reactive({
   imageFiles: "",
 
   features: ["A'lo darajada xizmat ko'rsatamiz!"],
-  resolve_problems: ["Test uchun"],
+  resolve_problems: ["Kompyuter bilan bog'liq muommolaringizni hal qilib beramiz!"],
 });
 
 // add service
@@ -348,9 +348,11 @@ function handleSubmit(e) {
   if (form.imageFiles) {
     let formData = new FormData();
     formData.append("image", form.imageFiles);
-    axios.post(`services/update/${route.params.id}`, formData).then((res) => {
-      console.log(res, "images res");
-    });
+    axios
+      .post(`services/update/image/${route.params.id}`, formData)
+      .then((res) => {
+        console.log(res, "images res");
+      });
   }
 }
 

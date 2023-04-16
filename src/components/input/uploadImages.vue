@@ -6,7 +6,7 @@ Code
     >
     <div
       v-if="!small"
-      class="max-w-[300px] min-h-[170px] h-[170px] w-full flex items-center justify-center rounded-[10px] relative border border-dashed border-black image-upload"
+      class="max-w-[300px] min-h-[170px] h-[170px] w-full flex items-center justify-center rounded-[10px] relative border border-dashed !border-black image-upload"
       :class="[
         {
           'border-2 border-dashed border-[#E9ECF0]': !image.url,

@@ -44,7 +44,7 @@ import UploadImages from "../../components/input/uploadImages.vue";
 const toast = useToast();
 
 const form = reactive({
-  category_id: 1,
+  category_id: 2,
   configuration_id: 1,
   name: "",
   description: "",

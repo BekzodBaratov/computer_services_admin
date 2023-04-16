@@ -200,7 +200,9 @@ const form = reactive({
   imageFiles: "",
 
   features: ["A'lo darajada xizmat ko'rsatamiz!"],
-  resolve_problems: ["Test uchun"],
+  resolve_problems: [
+    "Kompyuter bilan bog'liq muommolaringizni hal qilib beramiz!",
+  ],
 });
 
 // add service
