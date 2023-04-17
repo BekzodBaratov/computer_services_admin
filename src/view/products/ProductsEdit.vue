@@ -4,11 +4,16 @@
     <!-- <pre>{{ productList.product }}</pre> -->
     <form method="POST" v-if="isMount">
       <div class="flex w-full gap-10">
-        <ProductInput v-model="productList.product.name" placeholder="Nomi" />
+        <ProductInput
+          v-model="productList.product.name"
+          placeholder="Nomi"
+          label="Nomi"
+        />
         <ProductInput
           v-model="productList.product.product_detail.price"
           input-type="number"
           placeholder="Narxi"
+          label="Narxi"
         />
       </div>
 
@@ -16,10 +21,22 @@
         <ProductInput
           v-model="productList.product.product_detail.colors"
           placeholder="Rangi"
+          label="Rangi"
         />
         <ProductInput
           v-model="productList.product.product_detail.condition"
           placeholder="Holati"
+          label="Holati"
+        />
+      </div>
+      <div class="flex w-full gap-10 items-center">
+        <Select
+          v-if="category.length"
+          class="w-full"
+          :data="category"
+          :model="productList?.product?.category.id"
+          :modelLabel="productList?.product?.category.name"
+          @getVal="selectVal($event)"
         />
       </div>
 
@@ -31,7 +48,7 @@
       <Textarea
         class="mt-4"
         v-model="productList.product.product_detail.description"
-        placeholder="Qisqacha sharhi"
+        placeholder="Qisqacha sharhini"
       />
 
       <button
@@ -54,7 +71,7 @@ import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
 import { onMounted } from "vue";
 import UploadImages from "../../components/input/uploadImages.vue";
-
+import Select from "../../components/input/select.vue";
 const route = useRoute();
 const router = useRouter();
 const toast = useToast();
@@ -63,7 +80,12 @@ const productList = ref([]);
 
 const form = reactive({
   imageFiles: "",
+  category_id: null,
 });
+
+function selectVal(e) {
+  form.category_id = e;
+}
 
 function getImages(e) {
   form.imageFiles = e.file;
@@ -78,7 +100,7 @@ const fetchData = (data) => {
     .get(`/products/${route.params.id}`)
     .then((res) => {
       productList.value = res.data.data;
-      console.log(res, "res");
+      form.category_id = productList.value.product?.category.id;
       isMount.value = true;
     })
     .catch((err) => {
@@ -93,6 +115,7 @@ function handleSubmit(e) {
     price: productList.value?.product?.product_detail?.price,
     description: productList.value?.product?.product_detail?.description,
     colors: productList.value?.product?.product_detail?.colors,
+    category_id: form.category_id,
   };
 
   axios
@@ -122,7 +145,16 @@ function handleSubmit(e) {
   }
 }
 
+const category = ref([]);
+
+function getCategoryList() {
+  axios.get("/categories").then((res) => {
+    category.value = res.data.data.categories;
+  });
+}
+
 onMounted(() => {
   fetchData();
+  getCategoryList();
 });
 </script>
