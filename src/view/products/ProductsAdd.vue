@@ -20,7 +20,6 @@
       />
     </div>
 
-    <!-- <pre>{{ category }}e</pre> -->
     <div class="flex w-full gap-10 items-center" v-if="category.length">
       <Select class="w-full" :data="category" @getVal="selectVal($event)" />
       <SButton variant="info" @click="openModal = true"

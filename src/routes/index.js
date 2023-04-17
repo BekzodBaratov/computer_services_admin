@@ -7,6 +7,7 @@ import ServiceEdit from "../view/service/EditService.vue";
 import products from "../view/products/Products.vue";
 import ProductAdd from "../view/products/ProductsAdd.vue";
 import ProductEdit from "../view/products/ProductsEdit.vue";
+import Category from "../view/CategoryView.vue";
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: "/product_add",
     name: "ProductAdd",
     component: ProductAdd,
+  },
+  {
+    path: "/categories",
+    name: "Category",
+    component: Category,
   },
 ];
 

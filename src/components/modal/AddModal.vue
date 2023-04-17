@@ -37,11 +37,12 @@ const toast = useToast();
 const props = defineProps({
   isOpen: Boolean,
   loading: Boolean,
+  value: String,
 });
 
 const emit = defineEmits(["closeModal", "fetchModal"]);
 
-const modalValue = ref("");
+const modalValue = ref(props.value);
 const openCondition = ref(props.isOpen);
 
 function cancelModal() {
@@ -67,6 +68,13 @@ watch(
     if (!props.loading) {
       cancelModal();
     }
+  }
+);
+
+watch(
+  () => props.value,
+  () => {
+    modalValue.value = props.value;
   }
 );
 </script>
