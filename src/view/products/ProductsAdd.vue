@@ -22,16 +22,6 @@
 
     <div class="flex w-full gap-10 items-center" v-if="category.length">
       <Select class="w-full" :data="category" @getVal="selectVal($event)" />
-      <SButton variant="info" @click="openModal = true"
-        >Yangi Kategoriya qo'shish</SButton
-      >
-
-      <AddModal
-        :isOpen="openModal"
-        :loading="modalLoading"
-        @closeModal="openModal = $event"
-        @fetchModal="getModalItem"
-      />
     </div>
 
     <UploadImages @upload="getImages" />
@@ -58,27 +48,8 @@ import UploadImages from "../../components/input/uploadImages.vue";
 import Select from "../../components/input/select.vue";
 import { onMounted } from "vue";
 import SButton from "../../components/buttons/SButton.vue";
-import AddModal from "../../components/modal/AddModal.vue";
 
 const toast = useToast();
-
-const openModal = ref(false);
-const modalLoading = ref(false);
-
-function getModalItem(emit) {
-  modalLoading.value = true;
-  axios
-    .post("/categories", { name: emit })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      toast.error("Kategoriya qo'shishda xatolik yuz berdi!");
-    })
-    .finally(() => {
-      modalLoading.value = false;
-    });
-}
 
 const form = reactive({
   category_id: null,
@@ -133,13 +104,13 @@ const fetchData = (data) => {
     data: data,
   })
     .then((res) => {
-      toast.success(res.data.message);
+      toast.success("Mahsulot muvaffaqiyatli qo'shildi");
       setTimeout(() => {
         window.location.reload();
       }, 3000);
     })
     .catch((err) => {
-      toast.error(err.message);
+      toast.error("Qo'shishda xatoli yuz berdi!");
     })
     .finally(() => {
       form.name = "";
