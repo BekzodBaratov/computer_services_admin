@@ -2,28 +2,37 @@
   <h2 class="text-[20px] font-semibold">Productlarni qo'shish bo'limi</h2>
   <form method="POST">
     <div class="flex w-full gap-10">
-      <ProductInput v-model="form.name" placeholder="Nomi" />
+      <ProductInput v-model="form.name" placeholder="Nomi" label="Nomi" />
       <ProductInput
         v-model="form.price"
         input-type="number"
         placeholder="Narxi"
+        label="Narxi"
       />
     </div>
 
     <div class="flex w-full gap-10">
-      <ProductInput v-model="form.colors" placeholder="Rangi" />
-      <ProductInput v-model="form.condition" placeholder="Holati" />
+      <ProductInput v-model="form.colors" placeholder="Rangi" label="Rangi" />
+      <ProductInput
+        v-model="form.condition"
+        placeholder="Holati"
+        label="Holati"
+      />
     </div>
 
     <!-- <pre>{{ category }}e</pre> -->
-    <div class="flex w-full gap-10">
-      <Select
-        class="w-full"
-        v-if="category.length"
-        :data="category"
-        @getVal="selectVal($event)"
+    <div class="flex w-full gap-10 items-center" v-if="category.length">
+      <Select class="w-full" :data="category" @getVal="selectVal($event)" />
+      <SButton variant="info" @click="openModal = true"
+        >Yangi Kategoriya qo'shish</SButton
+      >
+
+      <AddModal
+        :isOpen="openModal"
+        :loading="modalLoading"
+        @closeModal="openModal = $event"
+        @fetchModal="getModalItem"
       />
-      <SButton variant="info">Yangi Kategoriya qo'shish</SButton>
     </div>
 
     <UploadImages @upload="getImages" />
@@ -50,7 +59,27 @@ import UploadImages from "../../components/input/uploadImages.vue";
 import Select from "../../components/input/select.vue";
 import { onMounted } from "vue";
 import SButton from "../../components/buttons/SButton.vue";
+import AddModal from "../../components/modal/AddModal.vue";
+
 const toast = useToast();
+
+const openModal = ref(false);
+const modalLoading = ref(false);
+
+function getModalItem(emit) {
+  modalLoading.value = true;
+  axios
+    .post("/categories", { name: emit })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      toast.error("Kategoriya qo'shishda xatolik yuz berdi!");
+    })
+    .finally(() => {
+      modalLoading.value = false;
+    });
+}
 
 const form = reactive({
   category_id: null,

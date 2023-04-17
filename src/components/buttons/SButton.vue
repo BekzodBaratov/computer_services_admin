@@ -123,7 +123,7 @@ const textStyle = computed(() => {
 .s-button .circular-loader {
   width: 18.09px;
   height: 18px;
-  stroke: #35abb2;
+  stroke: #f2f5f5;
 }
 
 .s-button .circular-loader__path {
@@ -211,10 +211,10 @@ const textStyle = computed(() => {
 /* Danger */
 .s-button-danger {
   color: #fff;
-  background: #fa4646 !important;
+  background: #dc2626 !important;
 }
 
 .s-button-danger:not(:disabled):hover {
-  background: rgba(250, 98, 98, 0.87) !important;
+  background: rgba(177, 48, 48, 0.87) !important;
 }
 </style>
