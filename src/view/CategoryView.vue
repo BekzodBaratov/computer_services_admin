@@ -56,6 +56,11 @@
               >
                 <i class="fa-solid fa-trash text-[red] text-[20px]"></i>
               </div>
+              <DeleteModal
+                :is-open="openDeleteModal"
+                @delete="fetchDeleteModal"
+                @closeModal="openDeleteModal = $event"
+              />
             </td>
           </tr>
         </tbody>
@@ -70,14 +75,17 @@ import { onMounted, ref } from "vue";
 import { useToast } from "vue-toastification";
 import SButton from "../components/buttons/SButton.vue";
 import AddModal from "../components/modal/AddModal.vue";
+import DeleteModal from "../components/modal/DeleteModal.vue";
 
 const toast = useToast();
 
 const openModal = ref(false);
+const openDeleteModal = ref(false);
 const modalLoading = ref(false);
 const editModalVal = ref("");
 const isEdit = ref(false);
 const editId = ref(null);
+const deleteId = ref(null);
 
 function openEditModal(name, id) {
   editModalVal.value = name;
@@ -109,7 +117,7 @@ function getModalItem(emit) {
   } else {
     modalLoading.value = true;
     axios
-      .post(`/categories/${editId.value}`, { name: emit })
+      .patch(`/categories/${editId.value}`, { name: emit })
       .then((res) => {
         fetchCategoryList();
       })
@@ -124,16 +132,23 @@ function getModalItem(emit) {
 
 const categoryList = ref([]);
 
+function fetchDeleteModal(emit) {
+  if (emit) {
+    axios
+      .delete(`/categories/${deleteId.value}`)
+      .then((res) => {
+        toast.success("Kategoriya muvaffaqiyatli o'chirildi");
+        fetchCategoryList();
+      })
+      .catch((res) => {
+        toast.error("Xatolik yuz berdi");
+      });
+  }
+}
+
 function productDelete(id) {
-  axios
-    .delete(`/categories/${id}`)
-    .then((res) => {
-      toast.success("Kategoriya muvaffaqiyatli o'chirildi");
-      fetchCategoryList();
-    })
-    .catch((res) => {
-      toast.error("Xatolik yuz berdi");
-    });
+  openDeleteModal.value = true;
+  deleteId.value = id;
 }
 
 function fetchCategoryList() {
