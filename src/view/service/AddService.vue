@@ -310,9 +310,9 @@ const fetchData = (data) => {
       form.description = "";
       form.imageFiles = "";
       form.specifications = {};
-      // setTimeout(() =>{
-      //   window.location.reload()
-      // },2000)
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     })
     .catch((err) => {
       toast.error("Xatolik yuz berdi");
