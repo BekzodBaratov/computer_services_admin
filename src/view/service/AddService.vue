@@ -304,7 +304,7 @@ const fetchData = (data) => {
     data: data,
   })
     .then((res) => {
-      toast.success(res.data.message);
+      toast.success("Muvaffaqiyatli qo'shildi");
       form.name = "";
       form.phone = "";
       form.description = "";
@@ -315,7 +315,7 @@ const fetchData = (data) => {
       // },2000)
     })
     .catch((err) => {
-      toast.error(err.message);
+      toast.error("Xatolik yuz berdi");
     });
 };
 </script>
