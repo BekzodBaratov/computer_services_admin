@@ -9,6 +9,7 @@ import ProductAdd from "../view/products/ProductsAdd.vue";
 import ProductEdit from "../view/products/ProductsEdit.vue";
 import Category from "../view/CategoryView.vue";
 import Configuration from "../view/ConfigurationView.vue";
+import Order from "../view/OrderView.vue";
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
     path: "/configuration",
     name: "Configuration",
     component: Configuration,
+  },
+  {
+    path: "/order",
+    name: "Order",
+    component: Order,
   },
 ];
 
