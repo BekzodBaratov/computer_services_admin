@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="flex justify-between items-center mb-4">
-      <h3 class="text-gray-700 text-3xl font-medium">Kategoriya bo'limi</h3>
+      <h3 class="text-gray-700 text-3xl font-medium">Configuratsiya bo'limi</h3>
       <SButton variant="info" @click="openAddMOdal"
-        >Yangi Kategoriya qo'shish</SButton
+        >Yangi Configuratsiya qo'shish</SButton
       >
     </div>
 
     <AddModal
+      label="Configuratsiya qo'shish"
       :isOpen="openModal"
       :loading="modalLoading"
       :value="editModalVal"
@@ -40,11 +41,11 @@
               scope="row"
               class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
-              {{ item?.name }}
+              {{ item?.type }}
             </th>
             <td class="flex items-center px-6 py-4 space-x-4 justify-end">
               <div
-                @click="openEditModal(item.name, item.id)"
+                @click="openEditModal(item.type, item.id)"
                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer"
               >
                 <i
@@ -105,12 +106,12 @@ function getModalItem(emit) {
   if (!isEdit.value) {
     modalLoading.value = true;
     axios
-      .post("/categories", { name: emit })
+      .post("/configurations", { type: emit })
       .then((res) => {
         fetchCategoryList();
       })
       .catch((err) => {
-        toast.error("Kategoriya qo'shishda xatolik yuz berdi!");
+        toast.error("Configuratsiya qo'shishda xatolik yuz berdi!");
       })
       .finally(() => {
         modalLoading.value = false;
@@ -118,12 +119,12 @@ function getModalItem(emit) {
   } else {
     modalLoading.value = true;
     axios
-      .patch(`/categories/${editId.value}`, { name: emit })
+      .patch(`/configurations/${editId.value}`, { type: emit })
       .then((res) => {
         fetchCategoryList();
       })
       .catch((err) => {
-        toast.error("Kategoriyani tahrirlashda xatolik yuz berdi!");
+        toast.error("Configuratsiyani tahrirlashda xatolik yuz berdi!");
       })
       .finally(() => {
         modalLoading.value = false;
@@ -136,9 +137,9 @@ const categoryList = ref([]);
 function fetchDeleteModal(emit) {
   if (emit) {
     axios
-      .delete(`/categories/${deleteId.value}`)
+      .delete(`/configurations/${deleteId.value}`)
       .then((res) => {
-        toast.success("Kategoriya muvaffaqiyatli o'chirildi");
+        toast.success("Configuratsiya muvaffaqiyatli o'chirildi");
         fetchCategoryList();
       })
       .catch((res) => {
@@ -153,8 +154,8 @@ function productDelete(id) {
 }
 
 function fetchCategoryList() {
-  axios.get("/categories").then((res) => {
-    categoryList.value = res.data.data.categories;
+  axios.get("/configurations").then((res) => {
+    categoryList.value = res.data.data.configurations;
   });
 }
 onMounted(() => {

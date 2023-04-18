@@ -1,9 +1,11 @@
 <template>
-  <div class="w-full flex justify-end my-2 mb-4">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-gray-700 text-3xl font-medium">Product bo'limi</h3>
     <router-link to="/product_add" class="btn btn-gray cursor-pointer"
       >Yangi product qo'shish</router-link
     >
   </div>
+
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead

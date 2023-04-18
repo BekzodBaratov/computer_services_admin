@@ -8,6 +8,7 @@ import products from "../view/products/Products.vue";
 import ProductAdd from "../view/products/ProductsAdd.vue";
 import ProductEdit from "../view/products/ProductsEdit.vue";
 import Category from "../view/CategoryView.vue";
+import Configuration from "../view/ConfigurationView.vue";
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
     path: "/categories",
     name: "Category",
     component: Category,
+  },
+  {
+    path: "/configuration",
+    name: "Configuration",
+    component: Configuration,
   },
 ];
 

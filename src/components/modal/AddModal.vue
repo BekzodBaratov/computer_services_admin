@@ -6,7 +6,7 @@
   >
     <div class="relative w-full h-full max-w-md md:h-auto mx-auto">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <p class="py-2 px-3 font-medium">Categoriya qo'shish:</p>
+        <p class="py-2 px-3 font-medium">{{ label }}:</p>
         <div class="px-4 py-2 text-center w-full">
           <form class="border mb-4">
             <textarea
@@ -38,6 +38,10 @@ const props = defineProps({
   isOpen: Boolean,
   loading: Boolean,
   value: String,
+  label: {
+    type: String,
+    default: "Categoriya qo`shish",
+  },
 });
 
 const emit = defineEmits(["closeModal", "fetchModal"]);

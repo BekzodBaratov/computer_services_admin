@@ -42,7 +42,8 @@
     </div>
   </div>
 
-  <div class="w-full flex justify-end my-2 mb-4">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-gray-700 text-3xl font-medium">Service bo'limi</h3>
     <router-link to="/service_add" class="btn btn-gray cursor-pointer"
       >Yangi service qo'shish</router-link
     >
