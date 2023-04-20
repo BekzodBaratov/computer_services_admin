@@ -51,7 +51,7 @@ Code
     </div>
     <div v-else class="p-2 bg-[#E9ECF0] rounded-[4px] relative">
       <input
-        accept="image/png, image/jpeg"
+        accept="image/png, image/jpeg, image/*"
         id="file"
         type="file"
         name="file"
