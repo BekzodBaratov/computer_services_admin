@@ -41,10 +41,52 @@
 
     <UploadImages @upload="getImages" />
 
+    <div>
+      <p class="mt-4">Products xusisiyatlarini qo'shing:</p>
+      <div class="w-full mb-4 my-2">
+        <form class="w-full" @submit="addService">
+          <input
+            type="text"
+            v-model="service"
+            class="w-full rounded-md h-[40px] px-4 outline-none"
+            placeholder="Xarakteristika qo'shish"
+          />
+        </form>
+        <div
+          class="my-2 w-full bg-white p-2 flex justify-between"
+          v-for="(item, ind) in form.features"
+          :key="ind"
+        >
+          <div>
+            <span class="font-medium mr-2">{{ ind + 1 }}.</span>{{ item }}
+          </div>
+          <div
+            class="flex items-center justify-end gap-3 flex-shrink-0 max-w-[200px] w-full"
+          >
+            <i
+              class="fa-solid fa-pen-to-square text-[blue] cursor-pointer"
+              @click="editService(ind)"
+            ></i>
+            <AddModal
+              label="Service turini tahrirlash"
+              :isOpen="openModalService"
+              :value="editServiceText"
+              @closeModal="openModalService = $event"
+              @fetchModal="getModalService"
+            />
+            <i
+              class="fa-solid fa-trash text-[red] cursor-pointer"
+              @click="deleteService(ind)"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <Textarea
       v-model="form.description"
       placeholder="Qisqacha sharhi"
-      class="mt-3"
+      class="mt-5"
     />
 
     <SButton variant="primary_dark" type="submit" @click="handleSubmit">
@@ -64,7 +106,13 @@ import Select from "../../components/input/select.vue";
 import { onMounted } from "vue";
 import SButton from "../../components/buttons/SButton.vue";
 
+import AddModal from "../../components/modal/AddModal.vue";
+
 const toast = useToast();
+
+const service = ref("");
+const editServiceText = ref("");
+const idEdit = ref("");
 
 const form = reactive({
   category_id: null,
@@ -75,8 +123,37 @@ const form = reactive({
   price: "",
   imageFiles: "",
   colors: "",
-  specifications: ["nimadir", "yana nimadir"],
+  features: ["RAM 8GB"],
 });
+
+// specification
+
+const openModalService = ref(false);
+
+function getModalService(emit) {
+  openModalService.value = false;
+  form.features[idEdit.value] = emit;
+}
+
+function deleteService(id) {
+  form.features = form.features.filter((el, item) => item !== id);
+}
+
+function editService(id) {
+  openModalService.value = true;
+  idEdit.value = id;
+  editServiceText.value = form.features[id];
+}
+
+function addService(e) {
+  e.preventDefault();
+  if (service.value !== "") {
+    form.features.push(service.value);
+    service.value = "";
+  }
+}
+
+// ++++
 
 function selectVal(e) {
   form.category_id = e;
@@ -99,7 +176,7 @@ const handleSubmit = (e) => {
     formData.append("description", form.description);
     formData.append("condition", form.condition);
     formData.append("colors", form.colors);
-    formData.append("specifications", JSON.stringify(form.specifications));
+    formData.append("specifications", JSON.stringify(form.features));
     fetchData(formData);
   }
 };

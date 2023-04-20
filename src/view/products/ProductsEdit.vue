@@ -61,6 +61,48 @@
         @upload="getImages"
       />
 
+      <div>
+        <p class="mt-4">Products xusisiyatlarini tahrirlash:</p>
+        <div class="w-full mb-4 mt-2">
+          <form class="w-full" @submit="addService">
+            <input
+              type="text"
+              v-model="service"
+              class="w-full rounded-md h-[40px] px-4 outline-none"
+              placeholder="Xarakteristika qo'shish"
+            />
+          </form>
+          <div
+            class="my-2 w-full bg-white p-2 flex justify-between"
+            v-for="(item, ind) in form.features"
+            :key="ind"
+          >
+            <div>
+              <span class="font-medium mr-2">{{ ind + 1 }}.</span>{{ item }}
+            </div>
+            <div
+              class="flex items-center justify-end gap-3 flex-shrink-0 max-w-[200px] w-full"
+            >
+              <i
+                class="fa-solid fa-pen-to-square text-[blue] cursor-pointer"
+                @click="editService(ind)"
+              ></i>
+              <AddModal
+                label="Service turini tahrirlash"
+                :isOpen="openModalService"
+                :value="editServiceText"
+                @closeModal="openModalService = $event"
+                @fetchModal="getModalService"
+              />
+              <i
+                class="fa-solid fa-trash text-[red] cursor-pointer"
+                @click="deleteService(ind)"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <Textarea
         class="mt-4"
         v-model="productList.product.product_detail.description"
@@ -81,16 +123,22 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { ref, reactive } from "@vue/reactivity";
+import { onMounted } from "vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
+import AddModal from "../../components/modal/AddModal.vue";
 import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
-import { onMounted } from "vue";
 import UploadImages from "../../components/input/uploadImages.vue";
 import Select from "../../components/input/select.vue";
 const route = useRoute();
 const router = useRouter();
+
 const toast = useToast();
+
+const service = ref("");
+const editServiceText = ref("");
+const idEdit = ref("");
 
 const productList = ref([]);
 
@@ -98,7 +146,36 @@ const form = reactive({
   imageFiles: "",
   category_id: null,
   configuration_id: null,
+  features: ["RAM 8GB"],
 });
+
+// specification
+
+const openModalService = ref(false);
+function getModalService(emit) {
+  openModalService.value = false;
+  form.features[idEdit.value] = emit;
+}
+
+function deleteService(id) {
+  form.features = form.features.filter((el, item) => item !== id);
+}
+
+function editService(id) {
+  openModalService.value = true;
+  idEdit.value = id;
+  editServiceText.value = form.features[id];
+}
+
+function addService(e) {
+  e.preventDefault();
+  if (service.value !== "") {
+    form.features.push(service.value);
+    service.value = "";
+  }
+}
+
+// =======
 
 function selectVal(e) {
   form.category_id = e;
@@ -122,6 +199,9 @@ const fetchData = (data) => {
     .then((res) => {
       productList.value = res.data.data;
       form.category_id = productList.value.product?.category.id;
+      form.features = JSON.parse(
+        productList.value.product?.product_detail?.specifications
+      );
       isMount.value = true;
     })
     .catch((err) => {
@@ -138,6 +218,7 @@ function handleSubmit(e) {
     colors: productList.value?.product?.product_detail?.colors,
     category_id: form.category_id,
     configuration_id: form.configuration_id,
+    specifications: JSON.stringify(form.features),
   };
 
   axios

@@ -120,7 +120,7 @@ import { reactive, ref } from "@vue/reactivity";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import ProductInput from "../../components/input/productInput.vue";
-import Textarea from "../../components/input/textarea.vue";
+// import Textarea from "../../components/input/textarea.vue";
 import UploadImages from "../../components/input/uploadImages.vue";
 import AddModal from "../../components/modal/AddModal.vue";
 
