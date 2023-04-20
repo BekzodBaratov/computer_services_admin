@@ -30,13 +30,29 @@
         />
       </div>
       <div class="flex w-full gap-10 items-center">
+        <!-- <pre>{{ configuration }}</pre> -->
         <Select
           v-if="category.length"
           class="w-full"
+          label="Kategoriyani tanlang"
           :data="category"
           :model="productList?.product?.category.id"
           :modelLabel="productList?.product?.category.name"
           @getVal="selectVal($event)"
+        />
+        <Select
+          v-if="configuration.length"
+          class="w-full"
+          label="Confugratsiyani tanlang"
+          :modelLabel="
+            configuration.find(
+              (el) => el.id === productList?.product?.configurationId
+            ).type
+          "
+          :isType="true"
+          :model="productList?.product?.configurationId"
+          :data="configuration"
+          @getVal="selectConfigration($event)"
         />
       </div>
 
@@ -81,10 +97,15 @@ const productList = ref([]);
 const form = reactive({
   imageFiles: "",
   category_id: null,
+  configuration_id: null,
 });
 
 function selectVal(e) {
   form.category_id = e;
+}
+
+function selectConfigration(e) {
+  form.configuration_id = e;
 }
 
 function getImages(e) {
@@ -116,6 +137,7 @@ function handleSubmit(e) {
     description: productList.value?.product?.product_detail?.description,
     colors: productList.value?.product?.product_detail?.colors,
     category_id: form.category_id,
+    configuration_id: form.configuration_id,
   };
 
   axios
@@ -146,6 +168,7 @@ function handleSubmit(e) {
 }
 
 const category = ref([]);
+const configuration = ref([]);
 
 function getCategoryList() {
   axios.get("/categories").then((res) => {
@@ -153,8 +176,15 @@ function getCategoryList() {
   });
 }
 
+function fetchConfigurationList() {
+  axios.get("/configurations").then((res) => {
+    configuration.value = res.data.data.configurations;
+  });
+}
+
 onMounted(() => {
   fetchData();
   getCategoryList();
+  fetchConfigurationList();
 });
 </script>

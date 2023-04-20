@@ -75,14 +75,7 @@ const form = reactive({
   price: "",
   imageFiles: "",
   colors: "",
-  specifications: [
-    {
-      name: "Valisher",
-    },
-    {
-      name: "Bekzod",
-    },
-  ],
+  specifications: ["nimadir", "yana nimadir"],
 });
 
 function selectVal(e) {
@@ -106,7 +99,7 @@ const handleSubmit = (e) => {
     formData.append("description", form.description);
     formData.append("condition", form.condition);
     formData.append("colors", form.colors);
-    formData.append("specifications", form.specifications);
+    formData.append("specifications", JSON.stringify(form.specifications));
     fetchData(formData);
   }
 };
