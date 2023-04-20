@@ -20,7 +20,7 @@
               <th scope="col" class="px-6 py-3 text-left">Muommolar</th>
               <th scope="col" class="px-6 py-3 text-left">features</th>
 
-              <th scope="col" class="px-6 py-3">Qisqacha</th>
+              <!-- <th scope="col" class="px-6 py-3">Qisqacha</th> -->
 
               <th scope="col" class="px-6 py-3">Qo'shilgan vaqti</th>
 
@@ -77,12 +77,12 @@
                 </ul>
               </th>
 
-              <th
+              <!-- <th
                 scope="row"
                 class="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white"
               >
                 {{ item?.description }}
-              </th>
+              </th> -->
 
               <td class="px-6 py-4">
                 {{ formatDate(item.createdAt) }}

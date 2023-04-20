@@ -103,7 +103,7 @@
       </div>
     </div>
 
-    <Textarea v-model="form.description" placeholder="Qisqacha sharhi" />
+    <!-- <Textarea v-model="form.description" placeholder="Qisqacha sharhi" /> -->
 
     <button
       type="submit"
@@ -216,7 +216,7 @@ const handleSubmit = (e) => {
     formData.append("image", form.imageFiles);
     formData.append("name", form.name);
     formData.append("phone", phoneNumber);
-    formData.append("description", form.description);
+    // formData.append("description", form.description);
     formData.append("resolve_problems", JSON.stringify(form.resolve_problems));
     formData.append("features", JSON.stringify(form.features));
     fetchData(formData);

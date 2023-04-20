@@ -1,59 +1,4 @@
 <template>
-  <div
-    id="popup-modal"
-    class="fixed top-0 hidden items-center justify-center z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full h-[100vh]"
-  >
-    <div class="relative w-full h-full max-w-md md:h-auto mx-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <p class="py-2 px-3 font-medium">Tahrirlash:</p>
-
-        <div class="px-4 py-2 text-center w-full">
-          <form class="border mb-4">
-            <textarea
-              type="text"
-              class="w-full h-[80px] outline-none p-2 resize-none"
-              v-model="editServiceText"
-            ></textarea>
-          </form>
-          <div class="flex justify-end">
-            <SButton variant="danger" class="mr-2" @click="cancelModal"
-              >Bekor qilish</SButton
-            >
-            <SButton variant="info" @click="editModal">Saqlash</SButton>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- modal 2 -->
-  <div
-    id="popup-modal2"
-    class="fixed top-0 hidden items-center justify-center z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full h-[100vh]"
-  >
-    <div class="relative w-full h-full max-w-md md:h-auto mx-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <p class="py-2 px-3 font-medium">Tahrirlash:</p>
-
-        <div class="px-4 py-2 text-center w-full">
-          <form class="border mb-4">
-            <textarea
-              type="text"
-              class="w-full h-[80px] outline-none p-2 resize-none"
-              v-model="editProblemText"
-            ></textarea>
-          </form>
-          <div class="flex justify-end">
-            <SButton variant="danger" class="mr-2" @click="cancelModal2"
-              >Bekor qilish</SButton
-            >
-            <SButton variant="info" @click="editModal2">Saqlash</SButton>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <h2 class="text-[20px] font-semibold">Servicelar qo'shish bo'limi</h2>
   <form method="POST" v-if="isMount">
     <div class="flex w-full gap-10">
@@ -98,6 +43,13 @@
             class="fa-solid fa-pen-to-square text-[blue] cursor-pointer"
             @click="editService(ind)"
           ></i>
+          <AddModal
+            label="Service turini tahrirlash"
+            :isOpen="openModalService"
+            :value="editServiceText"
+            @closeModal="openModalService = $event"
+            @fetchModal="getModalService"
+          />
           <i
             class="fa-solid fa-trash text-[red] cursor-pointer"
             @click="deleteService(ind)"
@@ -134,6 +86,13 @@
               class="fa-solid fa-pen-to-square text-[blue] cursor-pointer"
               @click="editProblem(ind)"
             ></i>
+            <AddModal
+              label="Muommo turini tahrirlash"
+              :isOpen="openModalProblem"
+              :value="editProblemText"
+              @closeModal="openModalProblem = $event"
+              @fetchModal="getModalProblem"
+            />
             <i
               class="fa-solid fa-trash text-[red] cursor-pointer"
               @click="deleteProblem(ind)"
@@ -164,6 +123,7 @@ import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
 import UploadImages from "../../components/input/uploadImages.vue";
 import SButton from "../../components/buttons/SButton.vue";
+import AddModal from "../../components/modal/AddModal.vue";
 
 const toast = useToast();
 const route = useRoute();
@@ -188,6 +148,19 @@ const form = reactive({
   ],
 });
 
+// modal servise
+const openModalService = ref(false);
+function getModalService(emit) {
+  openModalService.value = false;
+  form.features[idEdit.value] = emit;
+}
+
+// modal probleam
+const openModalProblem = ref(false);
+function getModalProblem(emit) {
+  openModalProblem.value = false;
+  form.resolve_problems[idEdit.value] = emit;
+}
 // add service
 
 function addService(e) {
@@ -205,35 +178,11 @@ function deleteService(id) {
 const idEdit = ref("");
 function editService(id) {
   idEdit.value = id;
-  const modal = document.getElementById("popup-modal");
-  modal.classList.add("modal-class");
-  let name = form.features[id];
-  editServiceText.value = name;
-}
-
-function cancelModal() {
-  const modal = document.getElementById("popup-modal");
-  modal.classList.remove("modal-class");
-}
-
-function editModal() {
-  const modal = document.getElementById("popup-modal");
-  modal.classList.remove("modal-class");
-  form.features[idEdit.value] = editServiceText.value;
+  openModalService.value = true;
+  editServiceText.value = form.features[id];
 }
 
 // resolve propblem
-
-function cancelModal2() {
-  const modal = document.getElementById("popup-modal2");
-  modal.classList.remove("modal-class");
-}
-
-function editModal2() {
-  const modal = document.getElementById("popup-modal2");
-  modal.classList.remove("modal-class");
-  form.resolve_problems[idEdit.value] = editProblemText.value;
-}
 
 function addProblem(e) {
   e.preventDefault();
@@ -250,30 +199,12 @@ function deleteProblem(id) {
 }
 
 function editProblem(id) {
+  openModalProblem.value = true;
   idEdit.value = id;
-  const modal = document.getElementById("popup-modal2");
-  modal.classList.add("modal-class");
+
   let name = form.resolve_problems[id];
   editProblemText.value = name;
 }
-
-// submit form
-
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-
-//   if (form.imageFiles) {
-//     let phoneNumber = "+" + String(form.phone);
-//     let formData = new FormData();
-//     formData.append("image", form.imageFiles);
-//     formData.append("name", form.name);
-//     formData.append("phone", phoneNumber);
-//     formData.append("description", form.description);
-//     formData.append("resolve_problems", JSON.stringify(form.resolve_problems));
-//     formData.append("features", JSON.stringify(form.features));
-//     fetchData(formData);
-//   }
-// };
 
 function getImages(e) {
   form.imageFiles = e.file;
