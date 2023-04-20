@@ -20,8 +20,23 @@
       />
     </div>
 
-    <div class="flex w-full gap-10 items-center" v-if="category.length">
-      <Select class="w-full" :data="category" @getVal="selectVal($event)" />
+    <div class="flex w-full gap-10 items-center">
+      <Select
+        v-if="category.length"
+        class="w-full"
+        label="Kategoriyani tanlang"
+        :data="category"
+        @getVal="selectVal($event)"
+      />
+      <Select
+        v-if="configuration.length"
+        class="w-full"
+        label="Confugratsiyani tanlang"
+        modelLabel="Confugratsiyani tanlang"
+        :isType="true"
+        :data="configuration"
+        @getVal="selectConfigration($event)"
+      />
     </div>
 
     <UploadImages @upload="getImages" />
@@ -53,7 +68,7 @@ const toast = useToast();
 
 const form = reactive({
   category_id: null,
-  configuration_id: 1,
+  configuration_id: null,
   name: "",
   description: "",
   condition: "",
@@ -72,6 +87,10 @@ const form = reactive({
 
 function selectVal(e) {
   form.category_id = e;
+}
+
+function selectConfigration(e) {
+  form.configuration_id = e;
 }
 
 const handleSubmit = (e) => {
@@ -119,12 +138,14 @@ const fetchData = (data) => {
       form.description = "";
       form.condition = "";
       form.category_id = "";
+      form.configuration_id = "";
       form.imageFiles = "";
       form.specifications = {};
     });
 };
 
 const category = ref([]);
+const configuration = ref([]);
 
 function getCategoryList() {
   axios.get("/categories").then((res) => {
@@ -132,7 +153,14 @@ function getCategoryList() {
   });
 }
 
+function fetchConfigurationList() {
+  axios.get("/configurations").then((res) => {
+    configuration.value = res.data.data.configurations;
+  });
+}
+
 onMounted(() => {
   getCategoryList();
+  fetchConfigurationList();
 });
 </script>

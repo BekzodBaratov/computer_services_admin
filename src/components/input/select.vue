@@ -3,7 +3,7 @@
     <label
       for="small"
       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >Kategoriyani tanlang:</label
+      >{{ label }}:</label
     >
     <select
       id="small"
@@ -12,7 +12,7 @@
     >
       <option selected :value="model">{{ modelLabel }}</option>
       <option v-for="(item, index) in data" :key="index" :value="item.id">
-        {{ item.name }}
+        {{ !isType ? item.name : item.type }}
       </option>
     </select>
   </div>
@@ -28,6 +28,11 @@ defineProps({
   modelLabel: {
     type: String,
     default: "Kategoriyani tanlang",
+  },
+  label: String,
+  isType: {
+    type: Boolean,
+    default: false,
   },
 });
 
