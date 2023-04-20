@@ -1,79 +1,4 @@
 <template>
-  <div
-    id="popup-modal"
-    class="fixed top-0 hidden items-center justify-center z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full h-[100vh]"
-  >
-    <div class="relative w-full h-full max-w-md md:h-auto mx-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <p class="py-2 px-3 font-medium">Tahrirlash:</p>
-
-        <div class="px-4 py-2 text-center w-full">
-          <form class="border mb-4">
-            <textarea
-              type="text"
-              class="w-full h-[80px] outline-none p-2 resize-none"
-              v-model="editServiceText"
-            ></textarea>
-          </form>
-          <div class="flex justify-end">
-            <button
-              id="cancel"
-              @click="cancelModal"
-              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-            >
-              Bekor qilish
-            </button>
-            <button
-              id="agree"
-              @click="editModal"
-              class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 btn dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-            >
-              Saqlash
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- modal 2 -->
-  <div
-    id="popup-modal2"
-    class="fixed top-0 hidden items-center justify-center z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full h-[100vh]"
-  >
-    <div class="relative w-full h-full max-w-md md:h-auto mx-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <p class="py-2 px-3 font-medium">Tahrirlash:</p>
-
-        <div class="px-4 py-2 text-center w-full">
-          <form class="border mb-4">
-            <textarea
-              type="text"
-              class="w-full h-[80px] outline-none p-2 resize-none"
-              v-model="editProblemText"
-            ></textarea>
-          </form>
-          <div class="flex justify-end">
-            <button
-              id="cancel2"
-              @click="cancelModal2"
-              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-            >
-              Bekor qilish
-            </button>
-            <button
-              id="agree2"
-              @click="editModal2"
-              class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 btn dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-            >
-              Saqlash
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <h2 class="text-[20px] font-semibold">Servicelar qo'shish bo'limi</h2>
 
   <form method="POST">
@@ -119,6 +44,13 @@
             class="fa-solid fa-pen-to-square text-[blue] cursor-pointer"
             @click="editService(ind)"
           ></i>
+          <AddModal
+            label="Service turini tahrirlash"
+            :isOpen="openModalService"
+            :value="editServiceText"
+            @closeModal="openModalService = $event"
+            @fetchModal="getModalService"
+          />
           <i
             class="fa-solid fa-trash text-[red] cursor-pointer"
             @click="deleteService(ind)"
@@ -155,6 +87,13 @@
               class="fa-solid fa-pen-to-square text-[blue] cursor-pointer"
               @click="editProblem(ind)"
             ></i>
+            <AddModal
+              label="Muommo turini tahrirlash"
+              :isOpen="openModalProblem"
+              :value="editProblemText"
+              @closeModal="openModalProblem = $event"
+              @fetchModal="getModalProblem"
+            />
             <i
               class="fa-solid fa-trash text-[red] cursor-pointer"
               @click="deleteProblem(ind)"
@@ -183,6 +122,7 @@ import { useToast } from "vue-toastification";
 import ProductInput from "../../components/input/productInput.vue";
 import Textarea from "../../components/input/textarea.vue";
 import UploadImages from "../../components/input/uploadImages.vue";
+import AddModal from "../../components/modal/AddModal.vue";
 
 const toast = useToast();
 
@@ -191,6 +131,8 @@ const editServiceText = ref("");
 const editProblemText = ref("");
 
 const problem = ref("");
+
+const idEdit = ref("");
 
 const form = reactive({
   name: "",
@@ -204,6 +146,22 @@ const form = reactive({
     "Kompyuter bilan bog'liq muommolaringizni hal qilib beramiz!",
   ],
 });
+
+// modal service
+
+const openModalService = ref(false);
+
+function getModalService(emit) {
+  openModalService.value = false;
+  form.features[idEdit.value] = emit;
+}
+
+// modal probleam
+const openModalProblem = ref(false);
+function getModalProblem(emit) {
+  openModalProblem.value = false;
+  form.resolve_problems[idEdit.value] = emit;
+}
 
 // add service
 
@@ -219,38 +177,13 @@ function deleteService(id) {
   form.features = form.features.filter((el, item) => item !== id);
 }
 
-const idEdit = ref("");
 function editService(id) {
+  openModalService.value = true;
   idEdit.value = id;
-  const modal = document.getElementById("popup-modal");
-  modal.classList.add("modal-class");
-  let name = form.features[id];
-  editServiceText.value = name;
-}
-
-function cancelModal() {
-  const modal = document.getElementById("popup-modal");
-  modal.classList.remove("modal-class");
-}
-
-function editModal() {
-  const modal = document.getElementById("popup-modal");
-  modal.classList.remove("modal-class");
-  form.features[idEdit.value] = editServiceText.value;
+  editServiceText.value = form.features[id];
 }
 
 // resolve propblem
-
-function cancelModal2() {
-  const modal = document.getElementById("popup-modal2");
-  modal.classList.remove("modal-class");
-}
-
-function editModal2() {
-  const modal = document.getElementById("popup-modal2");
-  modal.classList.remove("modal-class");
-  form.resolve_problems[idEdit.value] = editProblemText.value;
-}
 
 function addProblem(e) {
   e.preventDefault();
@@ -267,11 +200,9 @@ function deleteProblem(id) {
 }
 
 function editProblem(id) {
+  openModalProblem.value = true;
   idEdit.value = id;
-  const modal = document.getElementById("popup-modal2");
-  modal.classList.add("modal-class");
-  let name = form.resolve_problems[id];
-  editProblemText.value = name;
+  editProblemText.value = form.resolve_problems[id];
 }
 
 // submit form
