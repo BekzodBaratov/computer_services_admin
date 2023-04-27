@@ -17,6 +17,7 @@
 
                 <th scope="col" class="p-4">Jami summa</th>
                 <th scope="col" class="px-6 py-3">Buyurtma vaqti</th>
+                <th scope="col" class="px-6 py-3">Holati</th>
               </tr>
             </thead>
             <tbody>
@@ -67,6 +68,20 @@
                 <td class="px-6 py-4 text-center">
                   {{ formatDate(item?.createdAt) }}
                 </td>
+
+                <td class="px-6 py-4 text-center">
+                  <div
+                    class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer"
+                    @click="productDelete(item?.id)"
+                  >
+                    <i class="fa-solid fa-trash text-[red] text-[20px]"></i>
+                  </div>
+                  <DeleteModal
+                    :is-open="openDeleteModal"
+                    @delete="fetchDeleteModal"
+                    @closeModal="openDeleteModal = $event"
+                  />
+                </td>
               </tr>
             </tbody>
           </table>
@@ -83,6 +98,7 @@ import { ref } from "vue";
 import { useToast } from "vue-toastification";
 import numberFunction from "../helpers/formatNumber";
 import formatDate from "../helpers/formatDate";
+import DeleteModal from "../components/modal/DeleteModal.vue";
 
 const toast = useToast();
 const serviceList = ref([]);
@@ -106,6 +122,25 @@ function fetchOrderList() {
     })
     .catch(() => {
       toast.error("Yuklanishda xatoli yuz berdi!");
+    });
+}
+
+const openDeleteModal = ref(false);
+const deleteId = ref(null);
+function productDelete(id) {
+  openDeleteModal.value = true;
+  deleteId.value = id;
+}
+
+function fetchDeleteModal() {
+  axios
+    .post(`/orders/${deleteId.value}`, { status: 1 })
+    .then((res) => {
+      toast.success("Muvaffaqiyatli o'chirildi");
+      fetchOrderList();
+    })
+    .catch((err) => {
+      toast.error("Xatolik yuz berdi");
     });
 }
 
