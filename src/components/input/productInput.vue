@@ -36,24 +36,4 @@ const props = defineProps({
   },
 });
 defineEmits(["update:modelValue"]);
-
-// const emit = defineEmits(["on-change"]);
-
-// const inputVal = ref(props.modelValue);
-
-// watch(
-//   () => inputVal.value,
-//   (val) => {
-//     emit("update:modelValue", val);
-//   }
-// );
-
-// const inputVal = computed({
-//   get() {
-//     return props.modelValue;
-//   },
-//   set(value) {
-//     emit("update:modelValue", value);
-//   },
-// });
 </script>

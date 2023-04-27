@@ -10,6 +10,7 @@ import ProductEdit from "../view/products/ProductsEdit.vue";
 import Category from "../view/CategoryView.vue";
 import Configuration from "../view/ConfigurationView.vue";
 import Order from "../view/OrderView.vue";
+import Slider from "../view/SliderView.vue";
 
 const routes = [
   {
@@ -66,6 +67,11 @@ const routes = [
     path: "/order",
     name: "Order",
     component: Order,
+  },
+  {
+    path: "/slider",
+    name: "Slider",
+    component: Slider,
   },
 ];
 

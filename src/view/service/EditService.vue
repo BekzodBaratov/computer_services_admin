@@ -18,7 +18,7 @@
     <UploadImages :image="productList.service.image_url" @upload="getImages" />
 
     <!-- to do -->
-    <p class="mt-4">Servise qo'shish:</p>
+    <p class="mt-4">Muommo qo'shish:</p>
     <div class="w-full my-4">
       <form class="w-full" @submit="addService">
         <input
@@ -61,7 +61,7 @@
     <!-- resolve problem -->
 
     <div class="mb-4 mt-2">
-      <p>Muommolar qo'shish:</p>
+      <p>Muommoga yechim qo'shish:</p>
       <div class="w-full my-3">
         <form class="w-full" @submit="addProblem">
           <input
