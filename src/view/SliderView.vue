@@ -126,6 +126,9 @@ function fetchDeleteModal(e) {
       })
       .catch(() => {
         toast.error("O'chirishda xatoli yuz berdi!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       });
   }
 }
@@ -141,6 +144,9 @@ function postData() {
     })
     .catch((err) => {
       toast.error("Qo'shishda xatolik yuz berdi");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     })
     .finally(() => {
       sliderName.value = "";

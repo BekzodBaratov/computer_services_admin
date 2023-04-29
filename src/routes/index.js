@@ -11,6 +11,8 @@ import Category from "../view/CategoryView.vue";
 import Configuration from "../view/ConfigurationView.vue";
 import Order from "../view/OrderView.vue";
 import Slider from "../view/SliderView.vue";
+import HomeText from "../view/HomeTextView.vue";
+import About from "../view/AboutView.vue";
 
 const routes = [
   {
@@ -72,6 +74,16 @@ const routes = [
     path: "/slider",
     name: "Slider",
     component: Slider,
+  },
+  {
+    path: "/home",
+    name: "HomeText",
+    component: HomeText,
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: About,
   },
 ];
 
