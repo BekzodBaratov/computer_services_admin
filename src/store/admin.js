@@ -17,7 +17,7 @@ export const admin = defineStore("admin", () => {
   );
 
   const isRegisteration = computed(() => {
-    return admin.value.name !== "";
+    return admin.value.name == "";
   });
 
   return { isRegisteration, admin };
