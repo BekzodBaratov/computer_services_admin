@@ -5,7 +5,7 @@
       <div class="loginModalbg p-16 text-[#F4F6F9] text-lg">
         <div class="flex flex-col gap-6">
           <img class="w-28 self-center mb-8" src="../../assets/logo.png" alt="" />
-          <form v-if="!changePassHandle" class="flex flex-col gap-6">
+          <form v-if="changePassHandle == 'login'" class="flex flex-col gap-6">
             <div class="flex flex-col">
               <div class="mb-4 flex flex-col">
                 <input
@@ -40,10 +40,10 @@
                   <span class="py-2 px-4">Вход</span>
                 </ButtonFill>
               </button>
-              <p @click="changePassHandle = true" class="cursor-pointer hover:underline">Change Password</p>
+              <p @click="changePassHandle = 'changePass'" class="cursor-pointer hover:underline">Change Password</p>
             </div>
           </form>
-          <form v-else class="flex flex-col gap-6">
+          <form v-if="changePassHandle == 'changePass'" class="flex flex-col gap-6">
             <div class="flex flex-col gap-6">
               <div class="flex flex-col">
                 <input
@@ -54,8 +54,8 @@
                   id="oldPassword"
                   placeholder="Старый пароль"
                 />
-                <span class="text-sm text-end text-red-600" v-if="v$.password.$error">{{
-                  v$.password.$errors[0].$message
+                <span class="text-sm text-end text-red-600" v-if="stateChangePass.errors.oldPassword">{{
+                  stateChangePass.errors.oldPassword
                 }}</span>
               </div>
               <div class="flex flex-col">
@@ -67,21 +67,21 @@
                   id="newPassword"
                   placeholder="Новый пароль"
                 />
-                <span class="text-sm text-end text-red-600" v-if="v$.password.$error">{{
-                  v$.password.$errors[0].$message
+                <span class="text-sm text-end text-red-600" v-if="stateChangePass.errors.newPassword">{{
+                  stateChangePass.errors.newPassword
                 }}</span>
               </div>
               <div class="flex flex-col">
                 <input
                   class="bg-transparent border min-w-[16rem] border-white rounded-xl py-1 px-3 text-[#f4f4f9] outline-none text-center placeholder:text-[#F4F6F9B2]"
                   type="password"
-                  v-model="stateChangePass.confirmPassword"
+                  v-model="stateChangePass.newPasswordConfirm"
                   name="confirmPassword"
                   id="confirmPassword"
                   placeholder="Подтвердите пароль"
                 />
-                <span class="text-sm text-end text-red-600" v-if="v$.password.$error">{{
-                  v$.password.$errors[0].$message
+                <span class="text-sm text-end text-red-600" v-if="stateChangePass.errors.newPasswordConfirm">{{
+                  stateChangePass.errors.newPasswordConfirm
                 }}</span>
               </div>
             </div>
@@ -91,7 +91,30 @@
                   <span class="py-2 px-4">Вход</span>
                 </ButtonFill>
               </button>
-              <p @click="changePassHandle = false" class="cursor-pointer hover:underline">Go Back</p>
+              <p @click="changePassHandle = 'login'" class="cursor-pointer hover:underline">Go Back</p>
+            </div>
+          </form>
+          <form v-if="changePassHandle == 'codePass'" class="flex flex-col gap-6">
+            <div class="flex flex-col">
+              <div class="mb-4 flex flex-col">
+                <input
+                  class="bg-transparent border min-w-[16rem] border-white rounded-xl py-1 px-3 text-[#f4f4f9] outline-none text-center placeholder:text-[#F4F6F9B2]"
+                  type="number"
+                  v-model="passCode"
+                  placeholder="000-000"
+                />
+                <span class="text-sm text-end text-red-600" v-if="!isCodeValid">{{
+                  "Password must be 6 characters long"
+                }}</span>
+              </div>
+            </div>
+            <div class="flex justify-center items-end gap-2">
+              <button type="submit" @click.prevent="codePassFunc">
+                <ButtonFill>
+                  <span class="py-2 px-4">Вход</span>
+                </ButtonFill>
+              </button>
+              <p @click="changePassHandle = 'changePass'" class="cursor-pointer hover:underline">Change Password</p>
             </div>
           </form>
         </div>
@@ -114,7 +137,9 @@ import { admin } from "../../store/admin";
 const store = admin();
 
 const loading = ref(false);
-const changePassHandle = ref(false);
+const changePassHandle = ref("login");
+const passCode = ref();
+const isCodeValid = ref(true);
 
 const state = reactive({
   email: "",
@@ -176,12 +201,55 @@ const fetchApi = (data) => {
     });
 };
 
-const stateChangePass = {
-  newPassword: "",
+const stateChangePass = reactive({
   oldPassword: "",
-  confirmPassword: "",
+  newPassword: "",
+  newPasswordConfirm: "",
+  errors: {
+    oldPassword: "",
+    newPassword: "",
+    newPasswordConfirm: "",
+  },
+});
+
+const changePassword = async () => {
+  const { oldPassword, newPassword, newPasswordConfirm } = stateChangePass;
+
+  if (!oldPassword.length) return (stateChangePass.errors.oldPassword = "old password required");
+  else if (!newPassword.length) return (stateChangePass.errors.newPassword = "new password required");
+  else if (!newPasswordConfirm.length) return (stateChangePass.errors.newPasswordConfirm = "confirm password required");
+  else if (newPasswordConfirm !== newPassword)
+    return (stateChangePass.errors.newPasswordConfirm = "confirm password same as old password");
+
+  console.log(stateChangePass);
+  loading.value = true;
+  try {
+    const user = await axios.post("users/update", { oldPassword, newPassword, newPasswordConfirm });
+    console.log(user);
+    changePassHandle.value = "codePass";
+    alert(user.data.message);
+  } catch (error) {
+    alert(error.response.data.message);
+  } finally {
+    loading.value = false;
+    stateChangePass.errors = { oldPassword: "", newPassword: "", newPasswordConfirm: "" };
+  }
 };
-const changePassword = () => {};
+async function codePassFunc() {
+  if (String(passCode.value).length !== 6) return (isCodeValid.value = false);
+  loading.value = true;
+  try {
+    const user = await axios.post("users/code", { code: passCode.value });
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+    alert(error.response.data.message);
+  } finally {
+    loading.value = false;
+    passCode.value = undefined;
+    isCodeValid.value = true;
+  }
+}
 </script>
 
 <style>
