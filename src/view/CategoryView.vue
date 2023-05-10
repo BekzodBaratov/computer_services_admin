@@ -107,6 +107,7 @@ function getModalItem(emit) {
     axios
       .post("/categories", { name: emit })
       .then((res) => {
+        editModalVal.value = "";
         fetchCategoryList();
       })
       .catch((err) => {
