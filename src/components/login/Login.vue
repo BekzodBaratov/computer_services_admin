@@ -1,10 +1,20 @@
 <template>
   <Teleport to="body">
-    <div v-if="store.isRegisteration" class="fixed z-[999999] inset-0 bg-[#0006] backdrop-blur-md"></div>
-    <div v-if="store.isRegisteration" class="fixed z-[999999] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div
+      v-if="store.isRegisteration"
+      class="fixed z-[999999] inset-0 bg-[#0006] backdrop-blur-md"
+    ></div>
+    <div
+      v-if="store.isRegisteration"
+      class="fixed z-[999999] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+    >
       <div class="loginModalbg p-16 text-[#F4F6F9] text-lg">
         <div class="flex flex-col gap-6">
-          <img class="w-28 self-center mb-8" src="../../assets/logo.png" alt="" />
+          <img
+            class="w-28 self-center mb-8"
+            src="../../assets/logo.png"
+            alt=""
+          />
           <form v-if="changePassHandle == 'login'" class="flex flex-col gap-6">
             <div class="flex flex-col">
               <div class="mb-4 flex flex-col">
@@ -16,9 +26,11 @@
                   id="email"
                   placeholder="john@gmail.com"
                 />
-                <span class="text-sm text-end text-red-600" v-if="v$.email.$error">{{
-                  v$.email.$errors[0].$message
-                }}</span>
+                <span
+                  class="text-sm text-end text-red-600"
+                  v-if="v$.email.$error"
+                  >{{ v$.email.$errors[0].$message }}</span
+                >
               </div>
               <div class="flex flex-col">
                 <input
@@ -29,9 +41,11 @@
                   id="password"
                   placeholder="Пароль"
                 />
-                <span class="text-sm text-end text-red-600" v-if="v$.password.$error">{{
-                  v$.password.$errors[0].$message
-                }}</span>
+                <span
+                  class="text-sm text-end text-red-600"
+                  v-if="v$.password.$error"
+                  >{{ v$.password.$errors[0].$message }}</span
+                >
               </div>
             </div>
             <div class="flex justify-center items-end gap-2">
@@ -40,10 +54,18 @@
                   <span class="py-2 px-4">Вход</span>
                 </ButtonFill>
               </button>
-              <p @click="changePassHandle = 'changePass'" class="cursor-pointer hover:underline">Change Password</p>
+              <p
+                @click="changePassHandle = 'changePass'"
+                class="cursor-pointer hover:underline"
+              >
+                Change Password
+              </p>
             </div>
           </form>
-          <form v-if="changePassHandle == 'changePass'" class="flex flex-col gap-6">
+          <form
+            v-if="changePassHandle == 'changePass'"
+            class="flex flex-col gap-6"
+          >
             <div class="flex flex-col gap-6">
               <div class="flex flex-col">
                 <input
@@ -54,9 +76,11 @@
                   id="oldPassword"
                   placeholder="Старый пароль"
                 />
-                <span class="text-sm text-end text-red-600" v-if="stateChangePass.errors.oldPassword">{{
-                  stateChangePass.errors.oldPassword
-                }}</span>
+                <span
+                  class="text-sm text-end text-red-600"
+                  v-if="stateChangePass.errors.oldPassword"
+                  >{{ stateChangePass.errors.oldPassword }}</span
+                >
               </div>
               <div class="flex flex-col">
                 <input
@@ -67,9 +91,11 @@
                   id="newPassword"
                   placeholder="Новый пароль"
                 />
-                <span class="text-sm text-end text-red-600" v-if="stateChangePass.errors.newPassword">{{
-                  stateChangePass.errors.newPassword
-                }}</span>
+                <span
+                  class="text-sm text-end text-red-600"
+                  v-if="stateChangePass.errors.newPassword"
+                  >{{ stateChangePass.errors.newPassword }}</span
+                >
               </div>
               <div class="flex flex-col">
                 <input
@@ -80,9 +106,11 @@
                   id="confirmPassword"
                   placeholder="Подтвердите пароль"
                 />
-                <span class="text-sm text-end text-red-600" v-if="stateChangePass.errors.newPasswordConfirm">{{
-                  stateChangePass.errors.newPasswordConfirm
-                }}</span>
+                <span
+                  class="text-sm text-end text-red-600"
+                  v-if="stateChangePass.errors.newPasswordConfirm"
+                  >{{ stateChangePass.errors.newPasswordConfirm }}</span
+                >
               </div>
             </div>
             <div class="flex justify-between items-end gap-2">
@@ -91,10 +119,18 @@
                   <span class="py-2 px-4">Вход</span>
                 </ButtonFill>
               </button>
-              <p @click="changePassHandle = 'login'" class="cursor-pointer hover:underline">Go Back</p>
+              <p
+                @click="changePassHandle = 'login'"
+                class="cursor-pointer hover:underline"
+              >
+                Go Back
+              </p>
             </div>
           </form>
-          <form v-if="changePassHandle == 'codePass'" class="flex flex-col gap-6">
+          <form
+            v-if="changePassHandle == 'codePass'"
+            class="flex flex-col gap-6"
+          >
             <div class="flex flex-col">
               <div class="mb-4 flex flex-col">
                 <input
@@ -103,9 +139,11 @@
                   v-model="passCode"
                   placeholder="000-000"
                 />
-                <span class="text-sm text-end text-red-600" v-if="!isCodeValid">{{
-                  "Password must be 6 characters long"
-                }}</span>
+                <span
+                  class="text-sm text-end text-red-600"
+                  v-if="!isCodeValid"
+                  >{{ "Password must be 6 characters long" }}</span
+                >
               </div>
             </div>
             <div class="flex justify-center items-end gap-2">
@@ -114,7 +152,12 @@
                   <span class="py-2 px-4">Вход</span>
                 </ButtonFill>
               </button>
-              <p @click="changePassHandle = 'changePass'" class="cursor-pointer hover:underline">Change Password</p>
+              <p
+                @click="changePassHandle = 'changePass'"
+                class="cursor-pointer hover:underline"
+              >
+                Change Password
+              </p>
             </div>
           </form>
         </div>
@@ -126,7 +169,13 @@
 
 <script setup>
 import { ref, reactive, computed } from "vue";
-import { required, email, minLength, helpers, maxLength } from "@vuelidate/validators";
+import {
+  required,
+  email,
+  minLength,
+  helpers,
+  maxLength,
+} from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import axios from "axios";
 
@@ -152,18 +201,30 @@ const rules = computed(() => {
       required,
       minLength: minLength(8),
       maxLength: maxLength(32),
-      containsUppercase: helpers.withMessage("The password requires an uppercase character", function (value) {
-        return /[A-Z]/.test(value);
-      }),
-      containsLowercase: helpers.withMessage("The password requires an lowercase character", function (value) {
-        return /[a-z]/.test(value);
-      }),
-      containsNumber: helpers.withMessage("The password requires an number character", function (value) {
-        return /[0-9]/.test(value);
-      }),
-      containsSpecial: helpers.withMessage("The password requires an special character", function (value) {
-        return /[#?!_@$%^&*.-]/.test(value);
-      }),
+      containsUppercase: helpers.withMessage(
+        "The password requires an uppercase character",
+        function (value) {
+          return /[A-Z]/.test(value);
+        }
+      ),
+      containsLowercase: helpers.withMessage(
+        "The password requires an lowercase character",
+        function (value) {
+          return /[a-z]/.test(value);
+        }
+      ),
+      containsNumber: helpers.withMessage(
+        "The password requires an number character",
+        function (value) {
+          return /[0-9]/.test(value);
+        }
+      ),
+      containsSpecial: helpers.withMessage(
+        "The password requires an special character",
+        function (value) {
+          return /[#?!_@$%^&*.-]/.test(value);
+        }
+      ),
     },
   };
 });
@@ -215,16 +276,25 @@ const stateChangePass = reactive({
 const changePassword = async () => {
   const { oldPassword, newPassword, newPasswordConfirm } = stateChangePass;
 
-  if (!oldPassword.length) return (stateChangePass.errors.oldPassword = "old password required");
-  else if (!newPassword.length) return (stateChangePass.errors.newPassword = "new password required");
-  else if (!newPasswordConfirm.length) return (stateChangePass.errors.newPasswordConfirm = "confirm password required");
+  if (!oldPassword.length)
+    return (stateChangePass.errors.oldPassword = "old password required");
+  else if (!newPassword.length)
+    return (stateChangePass.errors.newPassword = "new password required");
+  else if (!newPasswordConfirm.length)
+    return (stateChangePass.errors.newPasswordConfirm =
+      "confirm password required");
   else if (newPasswordConfirm !== newPassword)
-    return (stateChangePass.errors.newPasswordConfirm = "confirm password same as old password");
+    return (stateChangePass.errors.newPasswordConfirm =
+      "confirm password same as old password");
 
   console.log(stateChangePass);
   loading.value = true;
   try {
-    const user = await axios.post("users/update", { oldPassword, newPassword, newPasswordConfirm });
+    const user = await axios.post("users/update", {
+      oldPassword,
+      newPassword,
+      newPasswordConfirm,
+    });
     console.log(user);
     changePassHandle.value = "codePass";
     alert(user.data.message);
@@ -232,7 +302,11 @@ const changePassword = async () => {
     alert(error.response.data.message);
   } finally {
     loading.value = false;
-    stateChangePass.errors = { oldPassword: "", newPassword: "", newPasswordConfirm: "" };
+    stateChangePass.errors = {
+      oldPassword: "",
+      newPassword: "",
+      newPasswordConfirm: "",
+    };
   }
 };
 async function codePassFunc() {
@@ -254,7 +328,11 @@ async function codePassFunc() {
 
 <style>
 .loginModalbg {
-  background: linear-gradient(180deg, rgba(79, 135, 211, 0.95) 0%, rgba(32, 95, 184, 0.95) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(79, 135, 211, 0.95) 0%,
+    rgba(32, 95, 184, 0.95) 100%
+  );
   border: 3px solid #f4f6f9;
   border-radius: 33px;
 }
