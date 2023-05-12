@@ -141,6 +141,9 @@ function postData() {
     .then((res) => {
       toast.success("Muvaffaqiyatli qo'shildi");
       fetchSliderList();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     })
     .catch((err) => {
       toast.error("Qo'shishda xatolik yuz berdi");

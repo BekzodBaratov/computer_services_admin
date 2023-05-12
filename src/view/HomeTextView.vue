@@ -61,6 +61,9 @@ function onSubmit() {
     .post("/spiners", formData)
     .then((res) => {
       toast.success("Muvaffaqiyatli jo'natildi");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     })
     .catch(() => {
       toast.error("Xatolik yuz berdi");

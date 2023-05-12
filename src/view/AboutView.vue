@@ -45,6 +45,9 @@ function onSubmit() {
     .then((res) => {
       console.log(res);
       toast.success("Muvaffaqiyatli qo'shildi");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     })
     .catch((err) => {
       console.log(arr, "err");
